@@ -1,0 +1,85 @@
+#usda 1.0
+
+def Xform "World"
+{
+
+    def Xform "articulation" (
+        prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+    )
+    {
+        def Capsule "articulationLink0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 1
+            color3f[] primvars:displayColor = [(0.4, 0.2, 0.1)]
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 24)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Capsule "rootLink" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 1
+            color3f[] primvars:displayColor = [(0.4, 0.2, 0.1)]
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (4, 0, 24)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def PhysicsRevoluteJoint "articulatedRevoluteJoint1"
+        {
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </World/articulation/articulationLink0>
+            rel physics:body1 = </World/articulation/rootLink>
+            float physics:breakForce = inf
+            float physics:breakTorque = inf
+            point3f physics:localPos0 = (2, 0, 0)
+            point3f physics:localPos1 = (-2, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+            float physics:lowerLimit = -5.625
+            float physics:upperLimit = 5.625
+        }
+
+        def Capsule "articulationLink1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 1
+            color3f[] primvars:displayColor = [(0.4, 0.2, 0.1)]
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (8, 0, 24)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }    
+
+        def PhysicsRevoluteJoint "articulatedRevoluteJoint2"
+        {
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </World/articulation/rootLink>
+            rel physics:body1 = </World/articulation/articulationLink1>
+            float physics:breakForce = inf
+            float physics:breakTorque = inf
+            point3f physics:localPos0 = (2, 0, 0)
+            point3f physics:localPos1 = (-2, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+            float physics:lowerLimit = -5.625
+            float physics:upperLimit = 5.625
+        }            
+
+    }
+
+}
+

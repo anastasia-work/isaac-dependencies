@@ -1,0 +1,1986 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (50000, 0, 0)
+                double radius = 500
+            }
+            dictionary Perspective = {
+                double3 position = (111.43793758461699, 177.81024407742007, 234.91963053109046)
+                double3 target = (-203.34905006809026, -448.1824912736174, -539.0041498899668)
+            }
+            dictionary Right = {
+                double3 position = (0, -50000, 0)
+                double radius = 500
+            }
+            dictionary Top = {
+                double3 position = (0, 0, 50000)
+                double radius = 500
+            }
+            string boundCamera = "/World/Camera"
+        }
+        dictionary omni_layer = {
+            string authoring_layer = "./ogn_trigger_conveyor.usda"
+            dictionary muteness = {
+            }
+        }
+        int refinementOverrideImplVersion = 0
+        dictionary renderSettings = {
+            float3 "rtx:debugView:pixelDebug:textColor" = (0, 1e18, 0)
+            float3 "rtx:fog:fogColor" = (0.75, 0.75, 0.75)
+            float3 "rtx:post:backgroundZeroAlpha:backgroundDefaultColor" = (0, 0, 0)
+            float3 "rtx:post:colorcorr:contrast" = (1, 1, 1)
+            float3 "rtx:post:colorcorr:gain" = (1, 1, 1)
+            float3 "rtx:post:colorcorr:gamma" = (1, 1, 1)
+            float3 "rtx:post:colorcorr:offset" = (0, 0, 0)
+            float3 "rtx:post:colorcorr:saturation" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:blackpoint" = (0, 0, 0)
+            float3 "rtx:post:colorgrad:contrast" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:gain" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:gamma" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:lift" = (0, 0, 0)
+            float3 "rtx:post:colorgrad:multiply" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:offset" = (0, 0, 0)
+            float3 "rtx:post:colorgrad:whitepoint" = (1, 1, 1)
+            float3 "rtx:post:lensDistortion:lensFocalLengthArray" = (10, 30, 50)
+            float3 "rtx:post:lensFlares:anisoFlareFalloffX" = (450, 475, 500)
+            float3 "rtx:post:lensFlares:anisoFlareFalloffY" = (10, 10, 10)
+            float3 "rtx:post:lensFlares:cutoffPoint" = (2, 2, 2)
+            float3 "rtx:post:lensFlares:haloFlareFalloff" = (10, 10, 10)
+            float3 "rtx:post:lensFlares:haloFlareRadius" = (75, 75, 75)
+            float3 "rtx:post:lensFlares:isotropicFlareFalloff" = (50, 50, 50)
+            float3 "rtx:post:tonemap:whitepoint" = (1, 1, 1)
+            float3 "rtx:raytracing:inscattering:singleScatteringAlbedo" = (0.9, 0.9, 0.9)
+            float3 "rtx:raytracing:inscattering:transmittanceColor" = (0.5, 0.5, 0.5)
+            float3 "rtx:sceneDb:ambientLightColor" = (0.1, 0.1, 0.1)
+        }
+    }
+    defaultPrim = "World"
+    endTimeCode = 100
+    metersPerUnit = 0.01
+    startTimeCode = 0
+    timeCodesPerSecond = 60
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    float3 xformOp:rotateXYZ = (0, 0, 0)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+    def Scope "Looks"
+    {
+        def Material "Red"
+        {
+            token outputs:mdl:displacement.connect = </World/Looks/Red/Shader.outputs:out>
+            token outputs:mdl:surface.connect = </World/Looks/Red/Shader.outputs:out>
+            token outputs:mdl:volume.connect = </World/Looks/Red/Shader.outputs:out>
+
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_tint = (1, 0, 0) (
+                    customData = {
+                        float3 default = (1, 1, 1)
+                    }
+                    displayGroup = "Albedo"
+                    displayName = "Color Tint"
+                    doc = "When enabled, this color value is multiplied over the final albedo color"
+                    hidden = false
+                )
+                token outputs:out (
+                    renderType = "material"
+                )
+            }
+        }
+
+        def Material "Green"
+        {
+            token outputs:mdl:displacement.connect = </World/Looks/Green/Shader.outputs:out>
+            token outputs:mdl:surface.connect = </World/Looks/Green/Shader.outputs:out>
+            token outputs:mdl:volume.connect = </World/Looks/Green/Shader.outputs:out>
+
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_tint = (0.089172006, 1, 0) (
+                    customData = {
+                        float3 default = (1, 1, 1)
+                    }
+                    displayGroup = "Albedo"
+                    displayName = "Color Tint"
+                    doc = "When enabled, this color value is multiplied over the final albedo color"
+                    hidden = false
+                )
+                token outputs:out (
+                    renderType = "material"
+                )
+            }
+        }
+
+        def Material "LightBlue"
+        {
+            token outputs:mdl:displacement.connect = </World/Looks/LightBlue/Shader.outputs:out>
+            token outputs:mdl:surface.connect = </World/Looks/LightBlue/Shader.outputs:out>
+            token outputs:mdl:volume.connect = </World/Looks/LightBlue/Shader.outputs:out>
+
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_tint = (0, 0.61783457, 1) (
+                    customData = {
+                        float3 default = (1, 1, 1)
+                    }
+                    displayGroup = "Albedo"
+                    displayName = "Color Tint"
+                    doc = "When enabled, this color value is multiplied over the final albedo color"
+                    hidden = false
+                )
+                token outputs:out (
+                    renderType = "material"
+                )
+            }
+        }
+
+        def Material "Gray"
+        {
+            token outputs:mdl:displacement.connect = </World/Looks/Gray/Shader.outputs:out>
+            token outputs:mdl:surface.connect = </World/Looks/Gray/Shader.outputs:out>
+            token outputs:mdl:volume.connect = </World/Looks/Gray/Shader.outputs:out>
+
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_tint = (0.45859545, 0.45859873, 0.45859414) (
+                    customData = {
+                        float3 default = (1, 1, 1)
+                    }
+                    displayGroup = "Albedo"
+                    displayName = "Color Tint"
+                    doc = "When enabled, this color value is multiplied over the final albedo color"
+                    hidden = false
+                )
+                token outputs:out (
+                    renderType = "material"
+                )
+            }
+        }
+
+        def Material "Triggers"
+        {
+            token outputs:mdl:displacement.connect = </World/Looks/Triggers/Shader.outputs:out>
+            token outputs:mdl:surface.connect = </World/Looks/Triggers/Shader.outputs:out>
+            token outputs:mdl:volume.connect = </World/Looks/Triggers/Shader.outputs:out>
+
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.97133756, 0.97132784, 0.97132784) (
+                    customData = {
+                        float3 default = (0.2, 0.2, 0.2)
+                    }
+                    displayGroup = "Albedo"
+                    displayName = "Albedo Color"
+                    doc = "This is the albedo base color"
+                    hidden = false
+                )
+                color3f inputs:diffuse_tint = (0.79617834, 0.015213611, 0.76135844) (
+                    customData = {
+                        float3 default = (1, 1, 1)
+                    }
+                    displayGroup = "Albedo"
+                    displayName = "Color Tint"
+                    doc = "When enabled, this color value is multiplied over the final albedo color"
+                    hidden = false
+                )
+                token outputs:out (
+                    renderType = "material"
+                )
+            }
+        }
+    }
+
+    def OmniGraph "ActionGraph"
+    {
+        token evaluationMode = "Automatic"
+        token evaluator:type = "execution"
+        token fabricCacheBacking = "Shared"
+        int2 fileFormatVersion = (1, 6)
+        token pipelineStage = "pipelineStageSimulation"
+
+        def OmniGraphNode "write_prim_attribute" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_enter_trigger.outputs:execOut>,
+                </World/ActionGraph/on_trigger.outputs:enterExecOut>,
+            ]
+            custom token inputs:name = "physics:velocity"
+            custom rel inputs:prim = </World/Assembly/Conveyor/Base>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            float3 attrValue = (0, 0, 0)
+                            string resolvedType = "vectorf[3]"
+                        }
+                    }
+                }
+            )
+            prepend token inputs:value.connect = </World/ActionGraph/constant_point3f.inputs:value>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-424.12073, -59.6075)
+        }
+
+        def OmniGraphNode "constant_point3f" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom point3f inputs:value = (0, 0, 0)
+            token node:type = "omni.graph.nodes.ConstantPoint3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-656.19684, 61.021645)
+        }
+
+        def OmniGraphNode "rotate_to_orientation" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            delete uint inputs:execIn.connect = </World/ActionGraph/on_collider_enter_trigger_02.outputs:execOut>
+            prepend uint inputs:execIn.connect = </World/ActionGraph/branch.outputs:execTrue>
+            custom float inputs:exponent = 1
+            custom rel inputs:prim = </World/Assembly/RotationTable>
+            custom string inputs:primPath = ""
+            custom double inputs:speed = 0.5
+            custom uint inputs:stop
+            custom vector3d inputs:target = (90, 0, 45)
+            custom bool inputs:usePath = 0
+            token node:type = "omni.graph.nodes.RotateToOrientation"
+            int node:typeVersion = 1
+            custom uint outputs:finished (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (713.44934, 1142.5574)
+        }
+
+        def OmniGraphNode "on_stage_event" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:eventName = "Simulation Stop Play" (
+                allowedTokens = ["Saved", "Selection Changed", "OmniGraph Start Play", "OmniGraph Stop Play", "Simulation Start Play", "Simulation Stop Play", "Animation Start Play", "Animation Stop Play", "Hierarchy Changed"]
+            )
+            custom bool inputs:onlyPlayback = 1
+            token node:type = "omni.graph.action.OnStageEvent"
+            int node:typeVersion = 3
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-887.13324, 658.0828)
+        }
+
+        def OmniGraphNode "rotate_to_orientation_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            delete uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_leave_trigger.outputs:execOut>,
+                </World/ActionGraph/on_stage_event.outputs:execOut>,
+            ]
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_enter_trigger_01.outputs:execOut>,
+                </World/ActionGraph/on_stage_event_01.outputs:execOut>,
+                </World/ActionGraph/on_stage_event.outputs:execOut>,
+                </World/ActionGraph/on_trigger_01.outputs:enterExecOut>,
+            ]
+            custom float inputs:exponent = 1
+            custom rel inputs:prim = </World/Assembly/RotationTable>
+            custom string inputs:primPath = ""
+            custom double inputs:speed = 2
+            custom uint inputs:stop
+            custom vector3d inputs:target = (90, 0, 0)
+            custom bool inputs:usePath = 0
+            token node:type = "omni.graph.nodes.RotateToOrientation"
+            int node:typeVersion = 1
+            custom uint outputs:finished (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-552.12994, 420.89935)
+        }
+
+        def OmniGraphNode "write_prim_attribute_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            delete uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_leave_trigger.outputs:execOut>,
+                </World/ActionGraph/on_collider_enter_trigger_01.outputs:execOut>,
+                </World/ActionGraph/on_stage_event.outputs:execOut>,
+            ]
+            prepend uint inputs:execIn.connect = </World/ActionGraph/rotate_to_orientation_01.outputs:finished>
+            custom token inputs:name = "physics:velocity"
+            custom rel inputs:prim = </World/Assembly/Conveyor/Base>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            float3 attrValue = (0, 0, 0)
+                            string resolvedType = "vectorf[3]"
+                        }
+                    }
+                }
+            )
+            prepend token inputs:value.connect = </World/ActionGraph/constant_point3f_03.inputs:value>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-111.65021, 462.44482)
+        }
+
+        def OmniGraphNode "constant_point3f_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom point3f inputs:value = (0, 0, 200)
+            token node:type = "omni.graph.nodes.ConstantPoint3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (122.70745, 600.51465)
+        }
+
+        def OmniGraphNode "write_prim_attribute_02" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = </World/ActionGraph/delay_01.outputs:finished>
+            custom token inputs:name = "physics:velocity"
+            custom rel inputs:prim = </World/Assembly/RotationTable>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            float3 attrValue = (0, 0, 0)
+                            string resolvedType = "vectorf[3]"
+                        }
+                    }
+                }
+            )
+            prepend token inputs:value.connect = </World/ActionGraph/constant_point3f_02.inputs:value>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1226.8231, 1057.6503)
+        }
+
+        def OmniGraphNode "write_prim_attribute_03" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            delete uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_enter_trigger_01.outputs:execOut>,
+                </World/ActionGraph/on_stage_event.outputs:execOut>,
+            ]
+            prepend uint inputs:execIn.connect = </World/ActionGraph/write_prim_attribute_01.outputs:execOut>
+            custom token inputs:name = "physics:velocity"
+            custom rel inputs:prim = </World/Assembly/RotationTable>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value
+            prepend token inputs:value.connect = </World/ActionGraph/constant_point3f_01.inputs:value>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (324.80292, 480.12155)
+        }
+
+        def OmniGraphNode "delay_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom double inputs:duration = 0.1
+            custom uint inputs:execIn
+            delete uint inputs:execIn.connect = [
+                </World/ActionGraph/rotate_to_orientation.outputs:finished>,
+                </World/ActionGraph/rotate_to_orientation_03.outputs:finished>,
+            ]
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/rotate_to_orientation_02.outputs:finished>,
+                </World/ActionGraph/rotate_to_orientation.outputs:finished>,
+                </World/ActionGraph/branch_01.outputs:execTrue>,
+            ]
+            token node:type = "omni.graph.action.Delay"
+            int node:typeVersion = 1
+            custom uint outputs:finished (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1014.423, 1038.3192)
+        }
+
+        def OmniGraphNode "constant_point3f_02" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom point3f inputs:value = (0, 0, 400)
+            token node:type = "omni.graph.nodes.ConstantPoint3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1006.23425, 1177.2914)
+        }
+
+        def OmniGraphNode "rotate_to_orientation_02" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = </World/ActionGraph/branch_01.outputs:execFalse>
+            custom float inputs:exponent = 1
+            custom rel inputs:prim = </World/Assembly/RotationTable>
+            custom string inputs:primPath = ""
+            custom double inputs:speed = 0.5
+            custom uint inputs:stop
+            custom vector3d inputs:target = (90, 0, -45)
+            custom bool inputs:usePath = 0
+            token node:type = "omni.graph.nodes.RotateToOrientation"
+            int node:typeVersion = 1
+            custom uint outputs:finished (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (714.0414, 839.99664)
+        }
+
+        def OmniGraphNode "branch" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:condition = 0
+            prepend bool inputs:condition.connect = </World/ActionGraph/starts_with.outputs:isPrefix>
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_enter_trigger_02.outputs:execOut>,
+                </World/ActionGraph/on_trigger_02.outputs:enterExecOut>,
+            ]
+            token node:type = "omni.graph.action.Branch"
+            int node:typeVersion = 1
+            custom uint outputs:execFalse (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:execTrue (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-90.64404, 1099.7855)
+        }
+
+        def OmniGraphNode "to_string" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:value
+            prepend token inputs:value.connect = [
+                </World/ActionGraph/on_collider_enter_trigger_02.outputs:otherCollider>,
+                </World/ActionGraph/on_trigger_02.outputs:otherCollider>,
+            ]
+            token node:type = "omni.graph.nodes.ToString"
+            int node:typeVersion = 1
+            custom string outputs:converted
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-610.7626, 1172.2258)
+        }
+
+        def OmniGraphNode "starts_with" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom string inputs:prefix = "/World/ConveyorDemo/Parts/Cube"
+            prepend string inputs:prefix.connect = </World/ActionGraph/get_prim_path_01.outputs:path>
+            custom string inputs:value = ""
+            prepend string inputs:value.connect = </World/ActionGraph/to_string.outputs:converted>
+            token node:type = "omni.graph.nodes.StartsWith"
+            int node:typeVersion = 1
+            custom bool outputs:isPrefix
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-348.383, 1317.7968)
+        }
+
+        def OmniGraphNode "branch_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:condition = 0
+            prepend bool inputs:condition.connect = </World/ActionGraph/starts_with_01.outputs:isPrefix>
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = </World/ActionGraph/branch.outputs:execFalse>
+            token node:type = "omni.graph.action.Branch"
+            int node:typeVersion = 1
+            custom uint outputs:execFalse (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:execTrue (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (182.63885, 957.6696)
+        }
+
+        def OmniGraphNode "starts_with_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom string inputs:prefix = "/World/ConveyorDemo/Parts/Cylinder"
+            prepend string inputs:prefix.connect = </World/ActionGraph/get_prim_path.outputs:path>
+            custom string inputs:value = ""
+            prepend string inputs:value.connect = </World/ActionGraph/to_string.outputs:converted>
+            token node:type = "omni.graph.nodes.StartsWith"
+            int node:typeVersion = 1
+            custom bool outputs:isPrefix
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-337.26965, 977.7976)
+        }
+
+        def OmniGraphNode "constant_point3f_03" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom point3f inputs:value = (0, 0, 40)
+            token node:type = "omni.graph.nodes.ConstantPoint3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-314.63004, 582.97125)
+        }
+
+        def OmniGraphNode "on_stage_event_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:eventName = "Animation Start Play" (
+                allowedTokens = ["Saved", "Selection Changed", "OmniGraph Start Play", "OmniGraph Stop Play", "Simulation Start Play", "Simulation Stop Play", "Animation Start Play", "Animation Stop Play", "Hierarchy Changed"]
+            )
+            custom bool inputs:onlyPlayback = 1
+            token node:type = "omni.graph.action.OnStageEvent"
+            int node:typeVersion = 3
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-894.32983, 258.66504)
+        }
+
+        def Backdrop "StopConveyorWhenEntersTableTrigger" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            uniform color3f ui:nodegraph:node:displayColor = (0.9617834, 0.93774766, 0.018378042)
+            uniform float2 ui:nodegraph:node:pos = (-929.07263, -97.56932)
+            uniform float2 ui:nodegraph:node:size = (737.88055, 273.02948)
+        }
+
+        def Backdrop "RestartConveyorWhenObjectEntersBox" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            uniform color3f ui:nodegraph:node:displayColor = (0.3, 0.6, 0.2)
+            uniform float2 ui:nodegraph:node:pos = (-924.50287, 221.87881)
+            uniform float2 ui:nodegraph:node:size = (1483.5739, 527.59827)
+        }
+
+        def Backdrop "RotateTableDependingOnPart" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            uniform color3f ui:nodegraph:node:displayColor = (0.2509554, 0.2, 0.6)
+            uniform float2 ui:nodegraph:node:pos = (-921.47406, 793.17664)
+            uniform float2 ui:nodegraph:node:size = (2384.1016, 691.44257)
+        }
+
+        def OmniGraphNode "write_prim_attribute_04" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/branch.outputs:execTrue>,
+                </World/ActionGraph/branch_01.outputs:execTrue>,
+                </World/ActionGraph/branch_01.outputs:execFalse>,
+            ]
+            custom token inputs:name = "physics:velocity"
+            custom rel inputs:prim = </World/Assembly/RotationTable>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value
+            prepend token inputs:value.connect = </World/ActionGraph/constant_point3f_04.inputs:value>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (431.24353, 1247.9435)
+        }
+
+        def OmniGraphNode "constant_point3f_04" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom point3f inputs:value = (0, -0.1, 0)
+            token node:type = "omni.graph.nodes.ConstantPoint3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "minimized"
+            uniform float2 ui:nodegraph:node:pos = (192.79126, 1368.2012)
+        }
+
+        def OmniGraphNode "get_prim_path" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom rel inputs:prim = </World/Assembly/Parts/Cylinder>
+            token node:type = "omni.graph.nodes.GetPrimPath"
+            int node:typeVersion = 3
+            custom string outputs:path = ""
+            custom token outputs:primPath
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-614.9987, 958.1997)
+        }
+
+        def OmniGraphNode "get_prim_path_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom rel inputs:prim = </World/Assembly/Parts/Cube>
+            token node:type = "omni.graph.nodes.GetPrimPath"
+            int node:typeVersion = 3
+            custom string outputs:path = ""
+            custom token outputs:primPath
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-618.74585, 1331.291)
+        }
+
+        def OmniGraphNode "write_prim_attribute_05" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_enter_trigger_03.outputs:execOut>,
+                </World/ActionGraph/on_trigger_04.outputs:enterExecOut>,
+            ]
+            custom token inputs:name = "visibility"
+            custom rel inputs:prim
+            custom token inputs:primPath
+            prepend token inputs:primPath.connect = [
+                </World/ActionGraph/on_collider_enter_trigger_03.outputs:triggerCollider>,
+                </World/ActionGraph/on_trigger_04.outputs:triggerCollider>,
+            ]
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 1
+            custom token inputs:value
+            prepend token inputs:value.connect = </World/ActionGraph/constant_token.inputs:value>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-333.41776, 2118.689)
+        }
+
+        def OmniGraphNode "constant_token" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:value = "inherited"
+            token node:type = "omni.graph.nodes.ConstantToken"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-800.7576, 2320.6538)
+        }
+
+        def OmniGraphNode "write_prim_attribute_06" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            delete uint inputs:execIn.connect = [
+                </World/ActionGraph/on_stage_event_02.outputs:execOut>,
+                </World/ActionGraph/on_stage_event_03.outputs:execOut>,
+            ]
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_collider_leave_trigger.outputs:execOut>,
+                </World/ActionGraph/on_trigger_03.outputs:leaveExecOut>,
+            ]
+            custom token inputs:name = "visibility"
+            custom rel inputs:prim
+            custom token inputs:primPath
+            prepend token inputs:primPath.connect = [
+                </World/ActionGraph/on_collider_leave_trigger.outputs:triggerCollider>,
+                </World/ActionGraph/on_trigger_03.outputs:triggerCollider>,
+            ]
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 1
+            custom token inputs:value
+            delete token inputs:value.connect = </World/ActionGraph/constant_token.inputs:value>
+            prepend token inputs:value.connect = </World/ActionGraph/constant_token_01.inputs:value>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-325.55264, 1851.1304)
+        }
+
+        def OmniGraphNode "constant_token_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:value = "invisible"
+            token node:type = "omni.graph.nodes.ConstantToken"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-799.06836, 2026.8555)
+        }
+
+        def OmniGraphNode "on_stage_event_02" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:eventName = "OmniGraph Start Play" (
+                allowedTokens = ["Saved", "Selection Changed", "OmniGraph Start Play", "OmniGraph Stop Play", "Simulation Start Play", "Simulation Stop Play", "Animation Start Play", "Animation Stop Play", "Hierarchy Changed"]
+            )
+            custom bool inputs:onlyPlayback = 1
+            token node:type = "omni.graph.action.OnStageEvent"
+            int node:typeVersion = 3
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-43.30677, 2016.706)
+        }
+
+        def OmniGraphNode "on_stage_event_03" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:eventName = "OmniGraph Stop Play" (
+                allowedTokens = ["Saved", "Selection Changed", "OmniGraph Start Play", "OmniGraph Stop Play", "Simulation Start Play", "Simulation Stop Play", "Animation Start Play", "Animation Stop Play", "Hierarchy Changed"]
+            )
+            custom bool inputs:onlyPlayback = 1
+            token node:type = "omni.graph.action.OnStageEvent"
+            int node:typeVersion = 3
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-41.15943, 2113.5933)
+        }
+
+        def OmniGraphNode "write_prim_attribute_07" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_stage_event_02.outputs:execOut>,
+                </World/ActionGraph/on_stage_event_03.outputs:execOut>,
+            ]
+            custom token inputs:name = "visibility"
+            custom rel inputs:prim = </World/Assembly/RotationTable/Trigger>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value = "invisible" (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            token attrValue = "invisible"
+                            string resolvedType = "token"
+                        }
+                    }
+                }
+            )
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (294.69376, 2560.1086)
+        }
+
+        def OmniGraphNode "write_prim_attribute_08" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_stage_event_02.outputs:execOut>,
+                </World/ActionGraph/on_stage_event_03.outputs:execOut>,
+            ]
+            custom token inputs:name = "visibility"
+            custom rel inputs:prim = </World/Assembly/RotationTable/TriggerCenter>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value = "invisible" (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            token attrValue = "invisible"
+                            string resolvedType = "token"
+                        }
+                    }
+                }
+            )
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (279.05576, 2308.2412)
+        }
+
+        def Backdrop "OGBackdrop" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            uniform token ui:description = "Triggers Visibility"
+            uniform color3f ui:nodegraph:node:displayColor = (0.3, 0.6, 0.2)
+            uniform float2 ui:nodegraph:node:pos = (-911.32227, 1514.7799)
+            uniform float2 ui:nodegraph:node:size = (1480.3469, 1309.1387)
+        }
+
+        def OmniGraphNode "write_prim_attribute_09" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_stage_event_02.outputs:execOut>,
+                </World/ActionGraph/on_stage_event_03.outputs:execOut>,
+            ]
+            custom token inputs:name = "visibility"
+            custom rel inputs:prim = </World/Assembly/Container_Cone/Trigger>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value = "invisible" (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            token attrValue = "invisible"
+                            string resolvedType = "token"
+                        }
+                    }
+                }
+            )
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (270.1678, 2045.6648)
+        }
+
+        def OmniGraphNode "write_prim_attribute_10" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_stage_event_02.outputs:execOut>,
+                </World/ActionGraph/on_stage_event_03.outputs:execOut>,
+            ]
+            custom token inputs:name = "visibility"
+            custom rel inputs:prim = </World/Assembly/Container_Cube/Trigger>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value = "invisible" (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            token attrValue = "invisible"
+                            string resolvedType = "token"
+                        }
+                    }
+                }
+            )
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (281.12677, 1547.604)
+        }
+
+        def OmniGraphNode "write_prim_attribute_11" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            prepend uint inputs:execIn.connect = [
+                </World/ActionGraph/on_stage_event_02.outputs:execOut>,
+                </World/ActionGraph/on_stage_event_03.outputs:execOut>,
+            ]
+            custom token inputs:name = "visibility"
+            custom rel inputs:prim = </World/Assembly/Container_Cylinder/Trigger>
+            custom token inputs:primPath
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 0
+            custom token inputs:value = "invisible" (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            token attrValue = "invisible"
+                            string resolvedType = "token"
+                        }
+                    }
+                }
+            )
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 1
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (273.53262, 1784.7698)
+        }
+
+        def OmniGraphNode "on_trigger" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:listenToAllTriggers
+            custom token[] inputs:triggersPaths = []
+            custom rel inputs:triggersRelationships = </World/Assembly/RotationTable/Trigger>
+            token node:type = "omni.physx.graph.OnTriggerCollider"
+            int node:typeVersion = 1
+            custom uint outputs:enterExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:leaveExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom token outputs:otherBody
+            custom token outputs:otherCollider
+            custom token outputs:triggerBody
+            custom token outputs:triggerCollider
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-910.9053, -60.022804)
+        }
+
+        def OmniGraphNode "on_trigger_01" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:listenToAllTriggers
+            custom token[] inputs:triggersPaths = []
+            custom rel inputs:triggersRelationships = [
+                </World/Assembly/Container_Cube/Trigger>,
+                </World/Assembly/Container_Cylinder/Trigger>,
+                </World/Assembly/Container_Cone/Trigger>,
+            ]
+            token node:type = "omni.physx.graph.OnTriggerCollider"
+            int node:typeVersion = 1
+            custom uint outputs:enterExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:leaveExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom token outputs:otherBody
+            custom token outputs:otherCollider
+            custom token outputs:triggerBody
+            custom token outputs:triggerCollider
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-886.28424, 420.94415)
+        }
+
+        def OmniGraphNode "on_trigger_02" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:listenToAllTriggers
+            custom token[] inputs:triggersPaths = []
+            custom rel inputs:triggersRelationships = </World/Assembly/RotationTable/TriggerCenter>
+            token node:type = "omni.physx.graph.OnTriggerCollider"
+            int node:typeVersion = 1
+            custom uint outputs:enterExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:leaveExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom token outputs:otherBody
+            custom token outputs:otherCollider
+            custom token outputs:triggerBody
+            custom token outputs:triggerCollider
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-883.65753, 1100.0471)
+        }
+
+        def OmniGraphNode "on_trigger_03" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:listenToAllTriggers
+            custom token[] inputs:triggersPaths = []
+            custom rel inputs:triggersRelationships = [
+                </World/Assembly/Container_Cube/Trigger>,
+                </World/Assembly/Container_Cylinder/Trigger>,
+                </World/Assembly/Container_Cone/Trigger>,
+                </World/Assembly/RotationTable/Trigger>,
+                </World/Assembly/RotationTable/TriggerCenter>,
+            ]
+            token node:type = "omni.physx.graph.OnTriggerCollider"
+            int node:typeVersion = 1
+            custom uint outputs:enterExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:leaveExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom token outputs:otherBody
+            custom token outputs:otherCollider
+            custom token outputs:triggerBody
+            custom token outputs:triggerCollider
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-802.23926, 1832.5702)
+        }
+
+        def OmniGraphNode "on_trigger_04" (
+            prepend apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:listenToAllTriggers
+            custom token[] inputs:triggersPaths = []
+            custom rel inputs:triggersRelationships = [
+                </World/Assembly/Container_Cube/Trigger>,
+                </World/Assembly/Container_Cylinder/Trigger>,
+                </World/Assembly/Container_Cone/Trigger>,
+                </World/Assembly/RotationTable/Trigger>,
+                </World/Assembly/RotationTable/TriggerCenter>,
+            ]
+            token node:type = "omni.physx.graph.OnTriggerCollider"
+            int node:typeVersion = 1
+            custom uint outputs:enterExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:leaveExecOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom token outputs:otherBody
+            custom token outputs:otherCollider
+            custom token outputs:triggerBody
+            custom token outputs:triggerCollider
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-803.8104, 2124.0461)
+        }
+    }
+
+    def SphereLight "SphereLight" (
+        prepend apiSchemas = ["ShapingAPI"]
+    )
+    {
+        float intensity = 30000
+        float radius = 50
+        float shaping:cone:angle = 180
+        float shaping:cone:softness
+        float shaping:focus
+        color3f shaping:focusTint
+        asset shaping:ies:file
+        double3 xformOp:rotateXYZ = (90, 0, 90)
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (35.423981078618446, 3.3981487759876814e-44, 113.67266725262593)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+
+    def Xform "Assembly"
+    {
+        double3 xformOp:rotateXYZ = (0, 0, 90)
+        double3 xformOp:scale = (0.1, 0.1, 0.1)
+        double3 xformOp:translate = (-60, 2.8239987811747545e-29, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+        def Xform "Parts"
+        {
+            double3 xformOp:rotateXYZ = (90, -0, 0)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 60.84137171541556, 302.2945523729583)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+            def Cylinder "Cylinder" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Y"
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                double height = 100
+                vector3f physics:angularVelocity = (0, 0, 0)
+                bool physics:collisionEnabled = 1
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                vector3f physics:velocity = (0, 0, 0)
+                float physxRigidBody:sleepThreshold = 0
+                double radius = 50
+                custom bool refinementEnableOverride = 1
+                custom int refinementLevel = 2
+                quatf xformOp:orient = (0.8150244, 0, 0, 0.57942665)
+                double3 xformOp:scale = (1.1, 1.1, 1.1)
+                double3 xformOp:translate = (-1.5953512004927755, 93.38631051438767, 578.919011846613)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cone "Cone" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Y"
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                double height = 100
+                rel material:binding = </World/Looks/Green> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                vector3f physics:angularVelocity = (0, 0, 0)
+                bool physics:collisionEnabled = 1
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                vector3f physics:velocity = (0, 0, 0)
+                float physxRigidBody:sleepThreshold = 0
+                double radius = 50
+                custom bool refinementEnableOverride = 1
+                custom int refinementLevel = 2
+                quatf xformOp:orient = (0.3591112, 0.038390454, 0.053057592, -0.9309942)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (-3.503612023746292, 123.59014656958351, 3.9073831846271077)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cone "Cone_03" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Y"
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                double height = 100
+                rel material:binding = </World/Looks/Green> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                vector3f physics:angularVelocity = (0, 0, 0)
+                bool physics:collisionEnabled = 1
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                vector3f physics:velocity = (0, 0, 0)
+                float physxRigidBody:sleepThreshold = 0
+                double radius = 50
+                custom bool refinementEnableOverride = 1
+                custom int refinementLevel = 2
+                quatf xformOp:orient = (0.62193215, -0.7516691, -0.08695351, -0.20157641)
+                double3 xformOp:scale = (1, 0.9999999999999999, 0.9999999999999999)
+                double3 xformOp:translate = (17.76785347919676, 107.38476405233718, 276.75316061007675)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cylinder "Cylinder_01" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Y"
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                double height = 100
+                vector3f physics:angularVelocity = (0, 0, 0)
+                bool physics:collisionEnabled = 1
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                vector3f physics:velocity = (0, 0, 0)
+                float physxRigidBody:sleepThreshold = 0
+                double radius = 50
+                custom bool refinementEnableOverride = 1
+                custom int refinementLevel = 2
+                quatf xformOp:orient = (0.99889445, 0, 0, 0.04700915)
+                double3 xformOp:scale = (1.1, 1.1, 1.1)
+                double3 xformOp:translate = (-81.59564337907415, 137.49075195258405, -112.60833129282742)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cube "Cube" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                rel material:binding = </World/Looks/Red> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                bool physics:collisionEnabled = 1
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                float physxRigidBody:sleepThreshold = 0
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 182.9999999999999, 416.9999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Cube_01" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                rel material:binding = </World/Looks/Red> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                bool physics:collisionEnabled = 1
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                float physxRigidBody:sleepThreshold = 0
+                double size = 100
+                double3 xformOp:rotateXYZ = (122.78723828162703, -50.93905714238551, -82.44282151075925)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (-61.3730156343786, 182.99999999999943, 129.0000000000025)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+
+        def Xform "Container_Cube" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Looks/Red> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double3 xformOp:rotateXYZ = (90, 3.1805547185895103e-15, -45)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (390, -1269.9999999999998, 11.294552372958151)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+            def Cube "Trigger" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxTriggerAPI", "MaterialBindingAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                rel material:binding = </World/Looks/Triggers> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                bool physics:collisionEnabled = 1
+                uniform token purpose = "default"
+                double size = 100
+                token visibility = "invisible"
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 0.2, 2.6)
+                double3 xformOp:translate = (1.1368683772161603e-13, 220, -5.684341886080802e-14)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Bottom" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (90, 0, 0)
+                double3 xformOp:scale = (3, 3, 0.19999999999999998)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:scale = (3, 2, 0.2)
+                double3 xformOp:translate = (-139, 110.99999999999989, -2.2737367544323206e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall3" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 2, 0.2)
+                double3 xformOp:translate = (0, 110.99999999999989, 140)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall4" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 2, 0.2)
+                double3 xformOp:translate = (0, 110.99999999999989, -140)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:scale = (3, 2, 0.2)
+                double3 xformOp:translate = (139, 110.99999999999989, -2.2737367544323206e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+
+        def Xform "Container_Cylinder" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = None (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double3 xformOp:rotateXYZ = (90, -0, 0)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, -1419.9999999999998, 11.294552372957924)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+            def Cube "Trigger" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxTriggerAPI", "MaterialBindingAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                rel material:binding = </World/Looks/Triggers> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                bool physics:collisionEnabled = 1
+                uniform token purpose = "default"
+                double size = 100
+                token visibility = "invisible"
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 0.2, 2.6)
+                double3 xformOp:translate = (0, 220, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Bottom" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (90, 0, 0)
+                double3 xformOp:scale = (3, 3, 0.19999999999999998)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:scale = (3, 2, 0.2)
+                double3 xformOp:translate = (-139, 110.99999999999989, -2.2737367544323206e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall3" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 2, 0.2)
+                double3 xformOp:translate = (0, 110.99999999999989, 140)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall4" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 2, 0.2)
+                double3 xformOp:translate = (0, 110.99999999999989, -140)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:scale = (3, 2, 0.2)
+                double3 xformOp:translate = (139, 110.99999999999989, -2.2737367544323206e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+
+        def Xform "Container_Cone" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Looks/Green> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double3 xformOp:rotateXYZ = (90, -3.1805547185895103e-15, 45)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (-390, -1269.9999999999998, 11.294552372958151)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+            def Cube "Trigger" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxTriggerAPI", "MaterialBindingAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                rel material:binding = </World/Looks/Triggers> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                bool physics:collisionEnabled = 1
+                uniform token purpose = "default"
+                double size = 100
+                token visibility = "invisible"
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 0.2, 2.6)
+                double3 xformOp:translate = (0, 220, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Bottom" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (90, 0, 0)
+                double3 xformOp:scale = (3, 3, 0.19999999999999998)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:scale = (3, 2, 0.2)
+                double3 xformOp:translate = (-139, 110.99999999999989, -2.2737367544323206e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall3" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 2, 0.2)
+                double3 xformOp:translate = (0, 110.99999999999989, 140)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall4" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2.6, 2, 0.2)
+                double3 xformOp:translate = (0, 110.99999999999989, -140)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:scale = (3, 2, 0.2)
+                double3 xformOp:translate = (139, 110.99999999999989, -2.2737367544323206e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+
+        def Xform "Conveyor" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </World/Looks/LightBlue> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double3 xformOp:rotateXYZ = (90, -0, 0)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, -160, 310)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+            def Cube "Base" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]
+                customData = {
+                    dictionary physics = {
+                        bool localSpaceVelocities = 1
+                    }
+                }
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                bool physics:kinematicEnabled = 1
+                bool physics:rigidBodyEnabled = 1
+                vector3f physics:velocity = (0, 0, 40)
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (3, 0.2, 9)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "BaseSupport"
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (2, 3, 8)
+                double3 xformOp:translate = (0, -160, -2.0463630789890885e-12)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "WallRight" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (0.2, 1, 9)
+                double3 xformOp:translate = (139.99999999999997, 60, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "WallLeft" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (0.2, 1, 9)
+                double3 xformOp:translate = (-140, 60, 8.526512829121202e-14)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "WallBehind" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:scale = (0.2, 1.5, 3.0000000000000013)
+                double3 xformOp:translate = (-4.662936703425622e-15, 65, -460)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+
+        def Xform "RotationTable" (
+            delete apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI"]
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "MaterialBindingAPI"]
+            customData = {
+                dictionary physics = {
+                    bool localSpaceVelocities = 1
+                }
+            }
+        )
+        {
+            rel material:binding = </World/Looks/Gray> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            bool physics:kinematicEnabled = 1
+            bool physics:rigidBodyEnabled = 1
+            vector3f physics:velocity = (0, 0, 200)
+            double3 xformOp:rotateXYZ = (90, 0, 0)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, -900, 302.2945523729581)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+            def Cube "Trigger" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxTriggerAPI", "MaterialBindingAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                rel material:binding = </World/Looks/Triggers> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                bool physics:collisionEnabled = 1
+                uniform token purpose = "default"
+                double size = 100
+                token visibility = "invisible"
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1.2, 0.5, 4.800000071525574)
+                double3 xformOp:translate = (0, 0.7, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cylinder "Base" (
+                delete apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+                customData = {
+                    dictionary physics = {
+                        bool localSpaceVelocities = 1
+                    }
+                }
+            )
+            {
+                uniform token axis = "Y"
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                double height = 100
+                bool physics:collisionEnabled = 1
+                double radius = 50
+                custom bool refinementEnableOverride = 1
+                custom int refinementLevel = 2
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (5.999999999999999, 0.5, 5.999999999999999)
+                double3 xformOp:translate = (0, -30, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "TriggerCenter" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxTriggerAPI", "MaterialBindingAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                rel material:binding = </World/Looks/Triggers> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                bool physics:collisionEnabled = 1
+                uniform token purpose = "default"
+                double size = 100
+                token visibility = "invisible"
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1, 0.7, 1.2)
+                double3 xformOp:translate = (-3.7865323450608567e-28, 32, 60.000000000000114)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (0.1, 1.0000000149011612, 5.000000074505806)
+                double3 xformOp:translate = (90, 44.10000065714121, 1.1368683772161603e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cube "Wall2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                bool physics:collisionEnabled = 1
+                double size = 100
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (0.1, 1.0000000149011612, 5.000000074505806)
+                double3 xformOp:translate = (-90, 44.10000065714121, 1.1368683772161603e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Cylinder "Base_01" (
+                delete apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]
+                customData = {
+                    dictionary physics = {
+                        bool localSpaceVelocities = 1
+                    }
+                }
+            )
+            {
+                uniform token axis = "Y"
+                float3[] extent = [(-50, -50, -50), (50, 50, 50)]
+                double height = 100
+                double radius = 50
+                custom bool refinementEnableOverride = 1
+                custom int refinementLevel = 2
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (4, 2.400000035762787, 4)
+                double3 xformOp:translate = (0, -180, 1.1368683772161603e-13)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+    }
+
+    def Camera "Camera" (
+        hide_in_stage_window = false
+        no_delete = false
+    )
+    {
+        float4[] clippingPlanes = []
+        float2 clippingRange = (1, 10000000)
+        float focalLength = 18.147562
+        float focusDistance = 0
+        float fStop = 0
+        float horizontalAperture = 20.955
+        float horizontalApertureOffset = 0
+        custom vector3d omni:kit:centerOfInterest = (-1.4210854715202004e-14, -5.3290705182007514e-14, -1043.9903113578023)
+        token projection = "perspective"
+        uniform token purpose = "default"
+        double shutter:close = 0
+        double shutter:open = 0
+        uniform token stereoRole = "mono"
+        float verticalAperture = 15.2908
+        float verticalApertureOffset = 0
+        token visibility = "inherited"
+        float3 xformOp:rotateYXZ = (50.796642, -9.5606635e-14, 134.04837)
+        float3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (197.22415196409875, 142.97713601188664, 192.35009095384976)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateYXZ", "xformOp:scale"]
+    }
+}
+
+def Xform "Environment"
+{
+    double3 xformOp:rotateXYZ = (0, 0, 0)
+    double3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0, 911.7532483268394, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+    def DistantLight "defaultLight" (
+        prepend apiSchemas = ["ShapingAPI"]
+    )
+    {
+        float angle = 1
+        float intensity = 3000
+        float shaping:cone:angle = 180
+        float shaping:cone:softness
+        float shaping:focus
+        color3f shaping:focusTint
+        asset shaping:ies:file
+        token visibility = "invisible"
+        double3 xformOp:rotateXYZ = (315, 0, 0)
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (-37.53306454335798, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+
+    def Mesh "Plane"
+    {
+        float3[] extent = [(-50, -50, 0), (50, 50, 0)]
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 1, 3, 2]
+        normal3f[] normals = [(0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1)] (
+            interpolation = "faceVarying"
+        )
+        point3f[] points = [(-50, -50, 0), (50, -50, 0), (-50, 50, 0), (50, 50, 0)]
+        float2[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+            interpolation = "faceVarying"
+        )
+        uniform token subdivisionScheme = "none"
+        double3 xformOp:rotateXYZ = (0, 0, 0)
+        double3 xformOp:scale = (50, 50, 50)
+        double3 xformOp:translate = (277.2000041306019, -556.2527123413937, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+}
+

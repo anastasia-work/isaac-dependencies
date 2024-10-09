@@ -1,0 +1,45 @@
+[package]
+category = "Internal"
+authors = ["NVIDIA"]
+title = "PhysX Visual Tests"
+description=""
+repository = ""
+keywords = ["physx", "tests"]
+
+[dependencies]
+"omni.physx.tests" = {}
+"omni.kit.property.physx" = {}
+"omni.kit.ui_test" = {}
+"omni.kit.viewport.utility" = {}
+
+[[python.module]]
+name = "omni.physxtestsvisual"
+
+[[test]]
+dependencies = [
+    "omni.hydra.rtx",
+    "omni.kit.window.viewport", # runs both VP1 and VP2
+    "omni.assets.plugins",
+    "omni.kit.renderer.core",
+    "omni.kit.primitive.mesh",
+    "omni.kit.renderer.capture",
+    "omni.kit.mainwindow",
+]
+args = [
+    "--/app/window/width=1280",
+    "--/app/window/height=1024",
+    "--/app/window/scaleToMonitor=false",
+    "--/app/asyncRendering=false", 
+    "--/app/file/ignoreUnsavedOnExit=true", 
+    "--no-window",
+    "--/renderer/multiGpu/autoEnable=false",
+    "--/app/profilerBackend=\"\"",
+    "--/rtx/materialDb/syncLoads=true",
+    "--/omni.kit.plugin/syncUsdLoads=true",
+    "--/rtx/hydra/materialSyncLoads=true",
+    "--/persistent/app/viewport/gizmo/scale=1" # Under VP2 this is 0 because it's set by omni.kit.viewport.menubar.setting that is not loaded by the test framework
+                                              # causing Physx Debug Visualization to be disabled (test_physics_visual_debug_draw_articulation FAILS)
+]
+timeout = 2700
+pyCoverageFilter = ["omni.physx", "omni.physxcommands", "omni.kit.property.physx"]
+pyCoverageThreshold = 0

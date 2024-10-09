@@ -1,0 +1,70 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnPhysXSceneQuerySweepSphereClosest.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_graph_SceneQuerySweepSphereClosest" (
+        docs="""Finds the closest collider that is hit by the input sweep."""
+    )
+    {
+        token node:type = "omni.physx.graph.SceneQuerySweepSphereClosest"
+        int node:typeVersion = 1
+
+        # 6 attributes
+        custom bool inputs:bothSides = false (
+            docs="""Sets whether backfaces of colliders should be included in checks."""
+        )
+        custom token inputs:direction (
+            docs="""Sweep direction vector"""
+        )
+        custom uint inputs:execIn (
+            docs="""Input execution"""
+        )
+        custom token inputs:origin (
+            docs="""Sweep origin"""
+        )
+        custom token inputs:radius (
+            docs="""Sphere radius"""
+        )
+        custom token inputs:sweepRange (
+            docs="""Sweep maximum distance. Use negative for infinite. If omitted, infinity is used."""
+        )
+
+        # 9 attributes
+        custom token outputs:bodyPrimPath (
+            docs="""Path of the associated body prim of the closest collider prim hit by the sweep."""
+        )
+        custom token outputs:colliderPrimPath (
+            docs="""Path of the closest collider prim that is hit by the sweep."""
+        )
+        custom float outputs:distance (
+            docs="""The distance from the origin to the point hit."""
+        )
+        custom uint outputs:execOut (
+            docs="""Output execution"""
+        )
+        custom int outputs:faceIndex (
+            docs="""The face index of the point hit."""
+        )
+        custom bool outputs:hit (
+            docs="""Returns true if any colliders are hit by the sweep."""
+        )
+        custom token outputs:materialPath (
+            docs="""Path of the material at the points hit."""
+        )
+        custom normal3f outputs:normal (
+            docs="""The surface normal of the point hit."""
+        )
+        custom point3f outputs:position (
+            docs="""The position of the point hit."""
+        )
+    }
+}

@@ -1,0 +1,58 @@
+[package]
+title = "PhysX Graph"
+category = "Graph"
+readme = "docs/README.md"
+changelog="docs/CHANGELOG.md"
+repository = ""
+description="PhysX OmniGraph nodes for Action Graph."
+keywords = ["physics", "physx", "omnigraph", "action"]
+icon = "icons/PhysXlogo.png"
+authors = ["NVIDIA"]
+
+## Main module for the Python interface
+[[python.module]]
+name = "omni.physxgraph"
+
+# Watch the .ogn files for hot reloading (only works for Python files)
+[fswatcher.patterns]
+include = ["*.ogn", "*.py"]
+exclude = ["Ogn*Database.py"]
+
+# Other extensions that need to load before this one
+[dependencies]
+"omni.physx" = {}
+"omni.physx.demos" = {}
+"omni.graph" = {}
+"omni.graph.tools" = {}
+
+[[test]]
+dependencies = [  
+   "omni.physx.tests",
+   "omni.assets.plugins",
+   "omni.kit.renderer.core",
+   "omni.graph.nodes",
+   "omni.graph.action"
+]
+
+stdoutFailPatterns.exclude = [
+    # Exclude messages which say they should be ignored
+    "*Ignore this error/warning*",
+]
+args = [
+    "--/app/asyncRendering=false",
+    "--/app/file/ignoreUnsavedOnExit=true",
+    "--/renderer/multiGpu/autoEnable=false",
+    "--/app/profilerBackend=\"\"",
+    "--/rtx/materialDb/syncLoads=true",
+    "--/omni.kit.plugin/syncUsdLoads=true",
+    "--/rtx/hydra/materialSyncLoads=true",
+    "--/app/renderer/resolution/width=64",
+    "--/app/renderer/resolution/height=64",
+    "--/rtx/rendermode=\"rtx\""
+]
+
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."
+
+
+[[native.plugin]]
+path = "bin/*.plugin"

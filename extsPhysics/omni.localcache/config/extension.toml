@@ -1,0 +1,20 @@
+[package]
+title = "Local cache"
+display_name = "Local Cache"
+
+authors = ["NVIDIA"]
+repository = ""
+keywords = ["database"]
+category = "Internal"
+
+[dependencies]
+"omni.kvdb" = {}
+
+[[python.module]]
+name = "omni.localcache"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

@@ -1,0 +1,177 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (0, 0, 50000)
+                double radius = 500
+                double3 target = (0, 0, 0)
+            }
+            dictionary Perspective = {
+                double3 position = (7.215637290310033, 5.215637290310035, 29.215637290310028)
+                double radius = 9.033748780667842
+                double3 target = (2, 0, 24)
+            }
+            dictionary Right = {
+                double3 position = (-50000, 0, -1.1102230246251565e-11)
+                double radius = 500
+                double3 target = (0, 0, 0)
+            }
+            dictionary Top = {
+                double3 position = (-4.329780281177466e-12, 50000, 1.1102230246251565e-11)
+                double radius = 500
+                double3 target = (0, 0, 0)
+            }
+            string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary renderSettings = {
+            float "rtx:post:lensDistortion:cameraFocalLength" = 18.147562
+        }
+    }
+    metersPerUnit = 0.009999999776482582
+)
+
+def Xform "World"
+{
+    def Xform "articulation" (
+        prepend apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
+    )
+    {
+        def Capsule "articulationLink0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 1
+            vector3f physics:angularVelocity = (0, 0, 0)
+            vector3f physics:velocity = (0, 0, 0)
+            color3f[] primvars:displayColor = [(0.4, 0.2, 0.1)]
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 24)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def PhysicsFixedJoint "rootJoint"
+        {
+            rel physics:body1 = </World/articulation/articulationLink0>
+            float physics:breakForce = inf
+            float physics:breakTorque = inf
+            point3f physics:localPos0 = (0, 0, 24)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Capsule "articulationLink1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 1
+            vector3f physics:angularVelocity = (0, 0, 0)
+            vector3f physics:velocity = (0, 0, 0)
+            color3f[] primvars:displayColor = [(0.4, 0.2, 0.1)]
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (3.9999985694885254, 3.029912321039774e-8, 24)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def PhysicsRevoluteJoint "articulatedRevoluteJoint1" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </World/articulation/articulationLink0>
+            rel physics:body1 = </World/articulation/articulationLink1>
+            float physics:breakForce = inf
+            float physics:breakTorque = inf
+            point3f physics:localPos0 = (2, 0, 0)
+            point3f physics:localPos1 = (-2, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+            float physics:lowerLimit = -5.625
+            float physics:upperLimit = 5.625
+        }
+
+        def PhysicsRevoluteJoint "illegalJoint" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+            uniform token physics:axis = "X"
+            rel physics:body0 = </World/articulation/articulationLink0>
+            rel physics:body1 = </World/articulation/articulationLink1>
+            float physics:breakForce = inf
+            float physics:breakTorque = inf
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+    }
+}
+
+def PhysicsScene "physicsScene" (
+    prepend apiSchemas = ["PhysxSceneAPI"]
+)
+{
+    vector3f physics:gravityDirection = (0, -1, 0)
+    float physics:gravityMagnitude = 980
+}
+
+def "physicsMaterials"
+{
+    def Material "wood" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:density = 0.0005
+        float physics:dynamicFriction = 0.2
+        float physics:restitution = 0.5
+        float physics:staticFriction = 0.2
+    }
+
+    def Material "brick" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:density = 0.002
+        float physics:dynamicFriction = 0.6
+        float physics:restitution = 0.5
+        float physics:staticFriction = 0.6
+    }
+
+    def Material "plastic" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:density = 0.0012
+        float physics:dynamicFriction = 0.7
+        float physics:restitution = 0.5
+        float physics:staticFriction = 0.7
+    }
+
+    def Material "lead" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:density = 0.014
+        float physics:dynamicFriction = 0.5
+        float physics:restitution = 0.08
+        float physics:staticFriction = 0.5
+    }
+
+    def Material "aluminum" (
+        prepend apiSchemas = ["PhysicsMaterialAPI"]
+    )
+    {
+        float physics:density = 0.0027
+        float physics:dynamicFriction = 1.1
+        float physics:restitution = 0.1
+        float physics:staticFriction = 1.1
+    }
+}
+

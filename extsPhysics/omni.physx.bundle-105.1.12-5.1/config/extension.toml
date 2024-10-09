@@ -1,0 +1,34 @@
+[package]
+category = "Simulation"
+authors = ["NVIDIA"]
+title = "Physics Bundle"
+description="Omniverse physics bundle extension."
+repository = ""
+keywords = ["physics", "physx", "vehicle"]
+changelog="docs/CHANGELOG.md"
+preview_image = "images/omni.physx.core.preview.png"
+icon = "icons/PhysXlogo.png"
+readme = "docs/README.md"
+toggleable = false
+
+[dependencies]
+"omni.physx" = {}
+"omni.physx.ui" = {}
+"omni.physx.vehicle" = {}
+"omni.physx.demos" = {}
+"omni.kit.property.physx" = {}
+"omni.usdphysics" = {}
+"omni.physx.cct"  = {}
+"omni.physx.commands"  = {}
+"omni.physx.camera"  = {}
+"omni.usd.schema.forcefield" = {}
+"omni.physx.supportui" = {}
+"omni.physx.graph" = {}
+
+[[test]]
+dependencies = [
+    "omni.kit.renderer.core",
+    "omni.kit.test",
+]
+
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

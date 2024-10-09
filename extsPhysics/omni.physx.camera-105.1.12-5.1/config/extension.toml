@@ -1,0 +1,29 @@
+[package]
+title = "Physx Camera"
+description="Provide several camera behaviors that follow animated and simulated objects on the stage."
+changelog="docs/CHANGELOG.md"
+repository = ""
+keywords = ["camera"]
+category = "internal"
+readme = "docs/README.md"
+
+[dependencies]
+"omni.ui" = {}
+"omni.kit.window.property" = {}
+"omni.physx" = {}
+"omni.kit.property.physx" = {}  # note: to make sure camera property widgets show after physx core widgets
+"omni.physx.demos" = {}
+"omni.kit.viewport.utility" = {}
+"omni.physx.ui" = {}
+
+[[python.module]]
+name = "omni.physxcamera"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+dependencies = [
+   "omni.kit.renderer.core",
+]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

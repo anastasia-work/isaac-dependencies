@@ -1,0 +1,46 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnPhysXOnContactEventBasic.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_graph_OnContactEventBasic" (
+        docs="""PhysX contact event triggered execution."""
+    )
+    {
+        token node:type = "omni.physx.graph.OnContactEventBasic"
+        int node:typeVersion = 1
+
+        # 2 attributes
+        custom token[] inputs:bodyPaths (
+            docs="""Body prim paths to check against."""
+        )
+        custom rel inputs:targetBodies (
+            docs="""Body prims to check against."""
+        )
+
+        # 5 attributes
+        custom token outputs:contactingBody (
+            docs="""Path of the physics body that came in contact with a node input body to trigger the contact event."""
+        )
+        custom uint outputs:foundExecOut (
+            docs="""Output execution trigger for contact found events. Note that the node only evaluates and triggers for contact events where one of the bodies have the Contact Report API applied."""
+        )
+        custom token outputs:inputBody (
+            docs="""Path of the node input physics body that triggered the contact event."""
+        )
+        custom uint outputs:lostExecOut (
+            docs="""Output execution trigger for contact lost events. Note that the node only evaluates and triggers for contact events where one of the bodies have the Contact Report API applied."""
+        )
+        custom uint outputs:persistsExecOut (
+            docs="""Output execution trigger for contact persists events. Note that the node only evaluates and triggers for contact events where one of the bodies have the Contact Report API applied."""
+        )
+    }
+}

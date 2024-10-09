@@ -1,0 +1,27 @@
+[package]
+title = "PhysX Cooking"
+description="PhysX 5 mesh cooking system."
+changelog="docs/CHANGELOG.md"
+readme = "docs/README.md"
+
+repository = ""
+keywords = ["physics", "physx", "cooking"]
+category = "internal"
+
+[dependencies]
+"omni.convexdecomposition" = {}
+"omni.localcache" = {}
+"omni.usd.libs" = {}
+"omni.usd.schema.physics" = {}
+"omni.usd.schema.physx" = {}
+"omni.usdphysics" = {}
+"omni.physx.foundation" = {}
+
+[[python.module]]
+name = "omni.physxcooking"
+
+[[native.plugin]]
+path = "bin/omni.physx.cooking.plugin"
+
+[[test]]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

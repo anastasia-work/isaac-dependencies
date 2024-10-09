@@ -1,0 +1,27 @@
+[package]
+title = "Physics Schema Tests"
+description="Tests loading of PhysicsSchema."
+changelog="docs/CHANGELOG.md"
+repository = ""
+keywords = ["physics", "tests"]
+category = "Internal"
+
+[dependencies]
+"omni.kit.stage_templates" = {}
+"omni.usdphysics" = {}
+"omni.physx.tests" = {}
+
+[[python.module]]
+name = "omni.usdphysicstests"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+dependencies = [
+   "omni.kit.window.viewport",  # runs both VP1 and VP2
+   "omni.kit.renderer.core",
+]
+args = ["--/app/asyncRendering=false"]
+pyCoverageFilter = ["omni.usdphysics"]
+pyCoverageThreshold = 0

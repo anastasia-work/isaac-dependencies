@@ -1,0 +1,3 @@
+# Changelog
+
+## USD PhysX Schema

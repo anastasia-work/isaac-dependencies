@@ -1,0 +1,24 @@
+[core]
+reloadable = false
+# Load at the start, load all schemas with order -100 (with order -1000 the USD libs are loaded)
+order = -100
+
+[package]
+category = "Internal"
+title = "USD semantics schema"
+description="USD semantics schema"
+
+[dependencies]
+"omni.usd.libs" = {}
+
+[[python.module]]
+name = "pxr"
+
+[[python.module]]
+name = "usd.schema.semantics"
+
+[[native.library]]
+path = "bin/${lib_prefix}semanticAPI${lib_ext}"
+
+[[test]]
+waiver = "USD Schema, tested externally"

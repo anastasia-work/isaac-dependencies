@@ -1,0 +1,74 @@
+[package]
+title = "PhysX SupportUI"
+description="PhysX Simplified UI."
+authors = ["NVIDIA"]
+changelog="docs/CHANGELOG.md"
+readme = "docs/README.md"
+icon = "resources/images/icon.png"
+preview_image = "resources/images/preview_image.png"
+repository = ""
+keywords = ["physx", "physics", "streamlinedux", "ux", "supportui", "simplifiedui", "babyui", "inspector"]
+category = "Simulation"
+
+[dependencies]
+"omni.ui" = {}
+"omni.physx" = {}
+"omni.physx.ui" = {}
+"omni.physx.commands" = {}
+"omni.physx.tests" = {optional=true}
+"omni.debugdraw" = {}
+"omni.kit.viewport.utility" = {} 
+"omni.kit.viewport.registry" = {}
+"omni.kit.window.preferences" = {}
+"omni.kit.window.toolbar" = {}
+"omni.kit.widget.stage" = {} # because of rb selection mode
+"omni.kit.widget.layers" = {} # because of rb selection mode
+"omni.kit.context_menu" = {}
+"omni.kit.widget.settings" = {}
+"omni.kit.window.popup_dialog" = {}
+"omni.kit.property.usd" = {}
+"omni.usd" = {}
+"omni.kit.commands" = {}
+"omni.kit.notification_manager" = {}
+"omni.kit.manipulator.prim" = {}
+"omni.kit.manipulator.selector" = {}
+"omni.kit.manipulator.selection" = {}
+
+[[python.module]]
+name = "omni.physxsupportui"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+dependencies = [
+    "omni.assets.plugins",
+    "omni.kit.renderer.core",
+    "omni.physx.tests",
+    "omni.physx.tests.visual",
+    "omni.physx.ui",
+    "omni.kit.window.viewport",
+    "omni.kit.ui_test",
+    "omni.kit.property.physx",
+    "omni.hydra.rtx",
+]
+args = [
+    "--/app/window/width=1280",
+    "--/app/window/height=1024",
+    "--/app/window/dpiScaleOverride=1.0",
+    "--/app/window/scaleToMonitor=false",
+    "--/app/asyncRendering=false",
+    "--/app/file/ignoreUnsavedOnExit=true",
+    "--no-window",
+    "--/renderer/multiGpu/autoEnable=false",
+    "--/renderer/debug/validation/enabled=false",
+    "--/app/profilerBackend=\"\"",
+    "--/rtx/materialDb/syncLoads=true",
+    "--/omni.kit.plugin/syncUsdLoads=true",
+    "--/rtx/hydra/materialSyncLoads=true",
+]
+timeout = 1200
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions." # FIXME: this is needed for Kit tests to go through
+
+[settings]
+persistent.exts."omni.kit.manipulator.selector".orders."omni.physxsupportui" = -10  # Add a setting to define the priority of this manipulator

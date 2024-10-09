@@ -1,0 +1,114 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary audioSettings = {
+            double dopplerLimit = 2
+            double dopplerScale = 1
+            double nonSpatialTimeScale = 1
+            double spatialTimeScale = 1
+            double speedOfSound = 340
+        }
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (50000.000000000015, -1.1102230246251565e-11, 0)
+                double radius = 500
+                double3 target = (0, 0, 0)
+            }
+            dictionary Perspective = {
+                double3 position = (116.17368150016145, 176.17368150016145, 1116.1736815001614)
+                double radius = 201.21871886060418
+                double3 target = (0, 60, 1000)
+            }
+            dictionary Right = {
+                double3 position = (0, -50000, -1.1102230246251565e-11)
+                double radius = 500
+                double3 target = (0, 0, 0)
+            }
+            dictionary Top = {
+                double3 position = (0, 0, 50000)
+                double radius = 500
+                double3 target = (0, 0, 0)
+            }
+            string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary renderSettings = {
+            float "rtx:post:lensDistortion:cameraFocalLength" = 18.147562
+        }
+    }
+    defaultPrim = "World"
+    endTimeCode = 100
+    metersPerUnit = 0.01
+    startTimeCode = 0
+    timeCodesPerSecond = 24
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def SphereLight "SphereLight"
+    {
+        float intensity = 30000
+        float radius = 150
+        double3 xformOp:translate = (650, 0, 1150)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def PhysicsScene "physicsScene"
+    {
+        vector3f physics:gravityDirection = (0, 0, -1)
+        float physics:gravityMagnitude = 981
+    }
+
+    def Cube "box0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.64705884, 0.08235294, 0.08235294)]
+        double size = 100
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.1, 1, 0.1)
+        double3 xformOp:translate = (0, 0, 1000)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "box1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        vector3f physics:angularVelocity = (0, 0, 0)
+        vector3f physics:velocity = (0, 0, 0)
+        color3f[] primvars:displayColor = [(0.2784314, 0.64705884, 1)]
+        double size = 100
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.1, 1, 0.1)
+        double3 xformOp:translate = (0, 120, 1000)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def PhysicsJoint "d6FixedJoint" (
+        prepend apiSchemas = ["PhysicsLimitAPI:transX", "PhysicsLimitAPI:transY", "PhysicsLimitAPI:transZ", "PhysicsLimitAPI:rotX", "PhysicsLimitAPI:rotY", "PhysicsLimitAPI:rotZ"]
+    )
+    {
+        float limit:rotX:physics:high = -1
+        float limit:rotX:physics:low = 1
+        float limit:rotY:physics:high = -1
+        float limit:rotY:physics:low = 1
+        float limit:rotZ:physics:high = -1
+        float limit:rotZ:physics:low = 1
+        float limit:transX:physics:high = -1
+        float limit:transX:physics:low = 1
+        float limit:transY:physics:high = -1
+        float limit:transY:physics:low = 1
+        float limit:transZ:physics:high = -1
+        float limit:transZ:physics:low = 1
+        rel physics:body0 = </World/box0>
+        rel physics:body1 = </World/box1>
+        float physics:breakForce = 1e20
+        float physics:breakTorque = 1e20
+        point3f physics:localPos0 = (0, 60, 0)
+        point3f physics:localPos1 = (0, -60, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+    }
+}
+

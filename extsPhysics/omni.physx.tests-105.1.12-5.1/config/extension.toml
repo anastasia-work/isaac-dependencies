@@ -1,0 +1,48 @@
+[package]
+category = "Internal"
+authors = ["NVIDIA"]
+title = "PhysX Tests"
+description=""
+repository = ""
+keywords = ["physx", "tests"]
+
+[dependencies]
+"omni.physx" = {}
+"omni.physx.ui" = {}
+"omni.physx.commands" = {}
+"omni.kit.test" = {}
+"omni.ui" = {}
+"omni.ui.scene" = {}
+"omni.kit.stage_templates" = {}
+"omni.kit.window.toolbar" = {}
+"omni.usd" = {}
+"usdrt.scenegraph" = {}
+
+[[python.module]]
+name = "omni.physxtests"
+
+[settings]
+exts."omni.physx.tests".subTestsFilter = ""
+
+[[test]]
+dependencies = [
+    "omni.assets.plugins",
+    "omni.kit.renderer.core",
+    "omni.kit.primitive.mesh",
+]
+args = [
+    "--/app/asyncRendering=false", 
+    "--/app/file/ignoreUnsavedOnExit=true" ,     
+    "--/renderer/multiGpu/autoEnable=false",
+    "--/app/profilerBackend=\"\"",
+    "--/rtx/materialDb/syncLoads=true",
+    "--/omni.kit.plugin/syncUsdLoads=true",
+    "--/rtx/hydra/materialSyncLoads=true",
+    "--/app/renderer/resolution/width=64",
+    "--/app/renderer/resolution/height=64",
+    "--no-window",
+    "--/rtx/rendermode=\"rtx\""
+]
+timeout = 1800
+pyCoverageFilter = ["omni.physx", "omni.physxcommands"]
+pyCoverageThreshold = 0

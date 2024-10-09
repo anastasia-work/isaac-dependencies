@@ -1,0 +1,52 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnCharacterController.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_cct_OgnCharacterController" (
+        docs="""Activate or deactivate a Character Controller on a Capsule prim"""
+    )
+    {
+        token node:type = "omni.physx.cct.OgnCharacterController"
+        int node:typeVersion = 1
+
+        # 8 attributes
+        custom uint inputs:activate (
+            docs="""Activate Character Controller on a Capsule. This can be done on e.g. Simulation Start Play event."""
+        )
+        custom string inputs:capsulePath = "" (
+            docs="""Connect a path of a capsule to use as a character controller. Use Spawn Capsule node to dynamically spawn a capsule for you if needed."""
+        )
+        custom rel inputs:controlsSettings (
+            docs="""Use Controls Settings to rebind controls."""
+        )
+        custom uint inputs:deactivate (
+            docs="""Deactivate Character Controller on a Capsule. This can be done on e.g. Simulation Stop Play event."""
+        )
+        custom token inputs:fpCameraPathToken (
+            docs="""If a camera path is connected the character controller with use first person camera mode"""
+        )
+        custom bool inputs:gravity = true (
+            docs="""Enable Gravity"""
+        )
+        custom token inputs:setupControls = "Auto" (
+            docs="""Setup controls: Auto will use default WASD/mouse/gamepad controls or Controls Settings keybinds if connected. Manual will skip control setup completely, leaving it to the user to do manually."""
+        )
+        custom int inputs:speed = 500 (
+            docs="""Speed in units/s"""
+        )
+
+        # 1 attribute
+        custom uint outputs:done (
+            docs="""The output execution"""
+        )
+    }
+}

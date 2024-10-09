@@ -1,0 +1,25 @@
+{
+    "nodes": {
+        "omni.physx.cct.OgnCharacterController": {
+            "description": "Activate or deactivate a Character Controller on a Capsule prim",
+            "version": 1,
+            "uiName": "Character Controller",
+            "extension": "omni.physx.cct",
+            "language": "Python"
+        },
+        "omni.physx.cct.OgnControlsSettings": {
+            "description": "Setup control rebinds and settings for the Character Controller",
+            "version": 2,
+            "uiName": "Controls Settings",
+            "extension": "omni.physx.cct",
+            "language": "Python"
+        },
+        "omni.physx.cct.OgnSpawnCapsule": {
+            "description": "Spawn a Capsule prim with stage-defined up axis to be used with a Character Controller",
+            "version": 1,
+            "uiName": "Spawn Capsule",
+            "extension": "omni.physx.cct",
+            "language": "Python"
+        }
+    }
+}

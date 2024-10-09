@@ -1,0 +1,58 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnPhysXGenerateContacts.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_graph_GenerateContacts" (
+        docs="""DEPRECATED - Use 'Generate Geometry Contacts'"""
+    )
+    {
+        token node:type = "omni.physx.graph.GenerateContacts"
+        int node:typeVersion = 1
+
+        # 6 attributes
+        custom float inputs:contactDistance = 0.01 (
+            docs="""Contact Distance."""
+        )
+        custom uint inputs:execIn (
+            docs="""Input execution"""
+        )
+        custom float inputs:meshContactMargin = 0.01 (
+            docs="""Mesh Contact Margin."""
+        )
+        custom token inputs:shape0 = "" (
+            docs="""Shape 0."""
+        )
+        custom token inputs:shape1 = "" (
+            docs="""Shape 1."""
+        )
+        custom float inputs:toleranceLength = 0.1 (
+            docs="""Tolerance Length."""
+        )
+
+        # 5 attributes
+        custom int outputs:contactCount (
+            docs="""The number of contacts."""
+        )
+        custom float[] outputs:contactDepths (
+            docs="""Contact depths."""
+        )
+        custom normal3f[] outputs:contactNormals (
+            docs="""Contact normals."""
+        )
+        custom point3f[] outputs:contactPoints (
+            docs="""Contact positions."""
+        )
+        custom uint outputs:execOut (
+            docs="""Output execution"""
+        )
+    }
+}

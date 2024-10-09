@@ -1,0 +1,48 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnPhysXImmediateComputeBoundsOverlaps.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_graph_ImmediateComputeBoundsOverlaps" (
+        docs="""Computes overlaps between pairs of axis aligned bounding boxes (broadphase)"""
+    )
+    {
+        token node:type = "omni.physx.graph.ImmediateComputeBoundsOverlaps"
+        int node:typeVersion = 1
+
+        # 2 attributes
+        custom uint inputs:execIn (
+            docs="""Input execution"""
+        )
+        custom rel inputs:primsBundle (
+            docs="""The prims of interest.
+It must be a bundle with one or more prim children.
+Connect with 'Compute Bounding Boxes' or with
+'Read Prims' checking 'Compute bounding box'.
+For each child prim reads the:
+ - 'sourcePrimPath'
+ - 'bboxMinCorner'
+ - 'bboxMaxCorner'
+(and optionally 'bboxTransform' and 'worldMatrix') attributes."""
+        )
+
+        # 3 attributes
+        custom uint outputs:execOut (
+            docs="""Output execution"""
+        )
+        custom token[] outputs:overlapsPair0 (
+            docs="""Array of tokens where the one at a given index is the first body in an identified overlap pair (the second is at corresponding index in 'overlapsPair1' output)."""
+        )
+        custom token[] outputs:overlapsPair1 (
+            docs="""Array of tokens where the one at a given index is the second body in an identified overlap pair (the first is at corresponding index in 'overlapsPair0' output)."""
+        )
+    }
+}

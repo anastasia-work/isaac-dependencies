@@ -1,0 +1,35 @@
+[package]
+category = "Internal"
+title = "PhysX Camera Tests"
+description="PhysX camera tests."
+repository = ""
+
+[dependencies]
+"omni.physx.camera" = {}
+"omni.physx.vehicle" = {}
+"omni.physx.tests" = {}
+
+[[python.module]]
+name = "omni.physxcameratests"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+timeout = 1200
+dependencies = [
+   "omni.kit.renderer.core",
+]
+args = [
+   "--/app/asyncRendering=false", 
+   "--/app/file/ignoreUnsavedOnExit=true" , 
+   "--/renderer/multiGpu/autoEnable=false",
+   "--/app/profilerBackend=\"\"",
+   "--/rtx/materialDb/syncLoads=true",
+   "--/omni.kit.plugin/syncUsdLoads=true",
+   "--/rtx/hydra/materialSyncLoads=true",
+   "--/app/renderer/resolution/width=64",
+   "--/app/renderer/resolution/height=64",
+   "--/rtx/rendermode=\"rtx\""
+]
+

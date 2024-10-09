@@ -1,0 +1,52 @@
+[package]
+title = "PhysX Forcefields"
+description="Apply attraction and repulsion forces to large quantities of rigid bodies."
+keywords = ["physics", "physx", "forcefields", "forcefield"]
+category = "Internal"
+repository = ""
+readme = "docs/README.md"
+icon = "icons/PhysXlogo.png"
+
+[dependencies]
+"omni.ui" = {optional=true}
+"omni.kit.window.property" = {optional=true}
+"omni.physx" = {}
+"omni.physx.fabric" = {}
+"omni.kit.property.physx" = {optional=true}  # note: to make sure forcefield property widgets show after physx core widgets
+"omni.physx.demos" = {optional=true}
+"omni.usd.schema.forcefield" = {}
+"omni.usd.libs" = {}
+"omni.graph.tools" = {optional=true}
+"omni.physx.graph" = {optional=true}
+"omni.physx.tests" = {optional=true}
+
+[[python.module]]
+name = "omni.physxforcefields"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+timeout = 900
+dependencies = [
+   "omni.kit.renderer.core",
+   "omni.graph.ui",
+   "omni.graph.nodes",
+   "omni.graph.action",
+   "omni.physx.tests",
+]
+args = [
+   "--/app/asyncRendering=false", 
+   "--/app/file/ignoreUnsavedOnExit=true",
+   "--/renderer/multiGpu/autoEnable=false", 
+   "--/app/profilerBackend=\"\"",
+   "--/rtx/materialDb/syncLoads=true",
+   "--/omni.kit.plugin/syncUsdLoads=true",
+   "--/rtx/hydra/materialSyncLoads=true",
+   "--/app/renderer/resolution/width=64",
+   "--/app/renderer/resolution/height=64",
+   "--/rtx/rendermode=\"rtx\""
+]
+
+
+

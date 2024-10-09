@@ -1,0 +1,30 @@
+[package]
+version = "0.1.0"
+category = "Internal"
+authors = ["NVIDIA"]
+title = "PhysX Property Widget"
+description="View and edit PhysX property values"
+repository = ""
+keywords = ["kit", "usd", "property", "physx"]
+changelog="docs/CHANGELOG.md"
+
+[dependencies]
+"omni.usd" = {}
+"omni.ui" = {}
+"omni.kit.window.property" = {}
+"omni.kit.property.usd" = {}
+"omni.kit.property.material" = {}
+"omni.kit.usd_undo" = {}
+"omni.physx" = {}
+"omni.physx.ui" = {}
+"omni.physx.commands" = {}
+
+[[python.module]]
+name = "omni.kit.property.physx"
+
+[[test]]
+dependencies = [
+   "omni.kit.renderer.core",
+]
+
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

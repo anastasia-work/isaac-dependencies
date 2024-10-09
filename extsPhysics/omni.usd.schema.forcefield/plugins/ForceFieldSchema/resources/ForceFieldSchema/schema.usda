@@ -1,0 +1,581 @@
+#usda 1.0
+(
+	subLayers = [
+    @usdGeom/schema.usda@
+	]
+)
+
+over "GLOBAL" (
+	customData = {
+	string libraryName = "forceFieldSchema"
+	string libraryPath = "forceFieldSchema"
+    dictionary libraryTokens = {
+        dictionary forceFieldBodies = {
+            string doc = """This token is the instance name used to label all
+                            of the PhysxForceField collecitonAPI's."""
+            }
+        }
+    }
+)
+{
+
+}
+
+//
+// ForceFields
+//
+class "PhysxForceFieldAPI"
+(
+    doc = """Force field base class that simply specifies the position and enables or disables the ForceField."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+)
+{
+    bool physxForceField:enabled = True (
+        customData = {
+            string apiName = "enabled"
+        }
+        displayName = "Enabled"
+        doc = """Enable or disable this ForceField. Overrides all other settings."""
+    )
+
+    float physxForceField:surfaceSampleDensity = 0.0 (
+        customData = {
+            string apiName = "surfaceSampleDensity"
+        }
+        displayName = "Surface Sample Density"
+        doc = """Number of rays to cast per square unit of surface area.
+                 When Surface Sampling is disabled, by setting this value to 0.0, 
+                 (or when it is enabled and a rigid body has no geometry to sample)
+                 all forces act through the Center of Mass of the Rigid Body and
+                 no rotational torques will be applied. Any positive value will 
+                 enable Surface Sampling. Ray casts are performed against the 
+                 Collision Object of the Rigid Body in order to apply forces on 
+                 the surface along the direction of the surface normal. This will
+                 apply torques to the Rigid Body that will induce rotation. Higher 
+                 densities will cast more rays over the surface and spread the same
+                 force over the surface area. More ray casts will generate more accurate 
+                 forces and torques, but will take additional compute time."""
+    )
+
+    bool physxForceField:surfaceAreaScaleEnabled = True (
+        customData = {
+            string apiName = "surfaceAreaScaleEnabled"
+        }
+        displayName = "Surface Area Scale Enabled"
+        doc = """Enable or disable scaling forces by the surface area that faces
+                 in the direction of the applied force. If a rigid body has no 
+                 geometry to sample, the surface area scaling is also disabled 
+                 for that rigid body. The surface area measurement is an 
+                 approximation based on the collision object bounding box.
+                 Certain forces, like wind and drag increase as the exposed surface 
+                 area increases, but this may not always be desirable."""
+    )
+
+    float3 physxForceField:position = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "position"
+        }
+        displayName = "Position"
+        doc = """The location of the force field. Set to (0, 0, 0) to obtain the position
+                 from the prim and continuously update it if it is animated."""
+    )
+
+    float2 physxForceField:range = (-1.0, -1.0) (
+        customData = {
+            string apiName = "range"
+        }
+        displayName = "Range"
+        doc = """Forces are not applied when the distance to the force field is outside
+                 of this (minimum, maximum) range. Each force field can have a different 
+                 definition of distance, e.g. for a spherical fore field, the distance is 
+                 to the center, for a plane, the distance is to the closest point on the 
+                 surface, for a line, it is to the closest point on the line. The minimum
+                 or maximum range is ignored if the value is negative."""
+    )
+}
+
+class "PhysxForceFieldSphericalAPI"
+(
+    doc = """A spherical force field that attracts and/or repels rigid bodies from a central point 
+             depending on the function coefficients. Positive values attract and negative values repel.
+             The net force on the rigid body is calculated using 
+             f = constant + linear * r + inverseSquare / r^2, where r is the distance to the center."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    float physxForceFieldSpherical:constant = 0.0 (
+        customData = {
+            string apiName = "constant"
+        }
+        displayName = "Constant"
+        doc = """constant applies a steady force."""
+    )
+
+    float physxForceFieldSpherical:linear = 0.0 (
+        customData = {
+            string apiName = "linear"
+        }
+        displayName = "Linear"
+        doc = """linear sets a force that varies with distance to the center."""
+    )
+
+    float physxForceFieldSpherical:inverseSquare = 0.0 (
+        customData = {
+            string apiName = "inverseSquare"
+        }
+        displayName = "Inverse Square"
+        doc = """inverseSquare sets a force that varies with the reciprocal of the square of the distance to the center."""
+    )
+}
+
+class "PhysxForceFieldConicalAPI"
+(
+    doc = """A conical force field that attracts and/or repels rigid bodies from a central point, 
+             but not outside of the cone angle limit, depending on the function coefficients. 
+             Positive values attract and negative values repel. The net force on the rigid body is calculated using 
+             f = constant + linear * r + inverseSquare / r^2, where r is the distance to the center."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    vector3f physxForceFieldLinear:direction = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "direction"
+        }
+        displayName = "Direction"
+        doc = """The direction vector of the central axis of the cone. Forces are not applied to rigid bodies outside of the cone."""
+    )
+
+    float physxForceFieldConical:angle = 0.0 (
+        customData = {
+            string apiName = "angle"
+        }
+        displayName = "Angle"
+        doc = """Angle from the central axis of the cone to the surface that defines the extents of the cone. Forces are not applied to rigid bodies outside of the cone."""
+    )
+
+    float physxForceFieldConical:constant = 0.0 (
+        customData = {
+            string apiName = "constant"
+        }
+        displayName = "Constant"
+        doc = """constant applies a steady force."""
+    )
+
+    float physxForceFieldConical:linear = 0.0 (
+        customData = {
+            string apiName = "linear"
+        }
+        displayName = "Linear"
+        doc = """linear sets a force that varies with distance to the center."""
+    )
+
+    float physxForceFieldConical:inverseSquare = 0.0 (
+        customData = {
+            string apiName = "inverseSquare"
+        }
+        displayName = "Inverse Square"
+        doc = """inverseSquare sets a force that varies with the reciprocal of the square of the distance to the center."""
+    )
+
+    float physxForceFieldConical:linearFalloff = 0.0 (
+        customData = {
+            string apiName = "linearFalloff"
+        }
+        displayName = "Linear Falloff"
+        doc = """ramp down forces linearly with the angle from the central axis. set linearFalloff to 0.0 to disable.
+                 linearFalloff is the percentage of the force remaining at the cone angle extents (>0.0 to 1.0)."""
+    )
+
+    float physxForceFieldConical:powerFalloff = 0.0 (
+        customData = {
+            string apiName = "powerFalloff"
+        }
+        displayName = "Power Falloff"
+        doc = """ramp down forces dramatically with the angle from the central axis. set powerFalloff to 0.0 to disable.
+                 >0.0 to 1.0 decay more as this angle increases. 1.0 and greater decay more as the angle apporaches the cone angle limit."""
+    )
+}
+
+class "PhysxForceFieldPlanarAPI"
+(
+    doc = """A planar force field that attracts and/or repels rigid bodies from a plane, defined by a 
+             point and normal vector, depending on the function coefficients. Positive values attract 
+             and negative values repel. The net force on the rigid body is calculated using 
+             f = constant + linear * r + inverseSquare / r^2, where r is the distance to the closest
+             point on the plane."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+
+)
+{
+    vector3f physxForceFieldPlanar:normal = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "normal"
+        }
+        displayName = "Normal"
+        doc = """The normal vector to the plane."""
+    )
+
+    float physxForceFieldPlanar:constant = 0.0 (
+        customData = {
+            string apiName = "constant"
+        }
+        displayName = "Constant"
+        doc = """constant applies a steady force."""
+    )
+
+    float physxForceFieldPlanar:linear = 0.0 (
+        customData = {
+            string apiName = "linear"
+        }
+        displayName = "Linear"
+        doc = """linear sets a force that varies with distance to the plane."""
+    )
+
+    float physxForceFieldPlanar:inverseSquare = 0.0 (
+        customData = {
+            string apiName = "inverseSquare"
+        }
+        displayName = "Inverse Square"
+        doc = """inverseSquare sets a force that varies with the reciprocal of the square of the distance to the plane."""
+    )
+}
+
+class "PhysxForceFieldLinearAPI"
+(
+    doc = """A linear force field that attracts and/or repels rigid bodies from a line, defined by a 
+             point and direction vector, depending on the function coefficients. Positive values attract 
+             and negative values repel. The net force on the rigid body is calculated using 
+             f = constant + linear * r + inverseSquare / r^2, where r is the distance to the closest
+             point on the line."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    vector3f physxForceFieldLinear:direction = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "direction"
+        }
+        displayName = "Direction"
+        doc = """The direction vector of the line."""
+    )
+
+    float physxForceFieldLinear:constant = 0.0 (
+        customData = {
+            string apiName = "constant"
+        }
+        displayName = "Constant"
+        doc = """constant applies a steady force."""
+    )
+
+    float physxForceFieldLinear:linear = 0.0 (
+        customData = {
+            string apiName = "linear"
+        }
+        displayName = "Linear"
+        doc = """linear sets a force that varies with distance to the line."""
+    )
+
+    float physxForceFieldLinear:inverseSquare = 0.0 (
+        customData = {
+            string apiName = "inverseSquare"
+        }
+        displayName = "Inverse Square"
+        doc = """inverseSquare sets a force that varies with the reciprocal of the square of the distance to the line."""
+    )
+}
+
+class "PhysxForceFieldDragAPI"
+(
+    doc = """A force field that slows rigid bodies by generating a force that is opposite to their velocity direction
+             using the forumula f = -linear * v - square * v^2."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    float physxForceFieldDrag:minimumSpeed = 0.0 (
+       customData = {
+            string apiName = "minimumSpeed"
+        }
+        displayName = "Minimum Speed"
+        doc = """Drag forces are not applied below this minimum speed."""
+    )
+
+    float physxForceFieldDrag:linear = 0.0 (
+        customData = {
+            string apiName = "linear"
+        }
+        displayName = "Linear"
+        doc = """linear sets a force that varies proportionally with the speed of the rigid body."""
+    )
+
+    float physxForceFieldDrag:square = 0.0 (
+        customData = {
+            string apiName = "square"
+        }
+        displayName = "Square"
+        doc = """square computes a force the varies with the square of the speed of the rigid body."""
+    )
+}
+
+class "PhysxForceFieldNoiseAPI"
+(
+    doc = """A force field that adds randomized motion to a rigid body."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    float physxForceFieldNoise:drag = 0.0 (
+        customData = {
+            string apiName = "drag"
+        }
+        displayName = "Drag"
+        doc = """The drag coefficient determines how quickly the body moves along with the noise.
+                 Smaller values cause the body to react more slowly."""
+    )
+
+    float3 physxForceFieldNoise:amplitude = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "amplitude"
+        }
+        displayName = "Amplitude"
+        doc = """The magnitude of the oscillations along each of the three local axes."""
+    )
+
+    float3 physxForceFieldNoise:frequency = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "frequency"
+        }
+        displayName = "Frequency"
+        doc = """The frequency of the oscillations for each of the three local axes."""
+    )
+}
+
+class "PhysxForceFieldWindAPI"
+(
+    doc = """A force field that simulates an unsteady wind that pushes rigid bodies."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    float physxForceFieldWind:drag = 0.0 (
+        customData = {
+            string apiName = "drag"
+        }
+        displayName = "Drag"
+        doc = """The drag coefficient determines how quickly the body moves along with the wind.
+                 Smaller values cause the body to react more slowly."""
+    )
+
+    float physxForceFieldWind:averageSpeed = 0.0 (
+        customData = {
+            string apiName = "averageSpeed"
+        }
+        displayName = "Average Speed"
+        doc = """The average speed of the wind. Speed changes are added to this base speed, but
+                 the net speed can never drop below zero."""
+    )
+
+    vector3f physxForceFieldWind:averageDirection = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "averageDirection"
+        }
+        displayName = "Average Direction"
+        doc = """The initial direction of the wind in the world coordinate system. Wind direction
+                 changes are added to this base direciton."""
+    )
+
+    float physxForceFieldWind:speedVariation = 0.0 (
+        customData = {
+            string apiName = "speedVariation"
+        }
+        displayName = "Speed Variation"
+        doc = """The magnitude of the random changes of the wind speed."""
+    )
+
+    float physxForceFieldWind:speedVariationFrequency = 0.0 (
+        customData = {
+            string apiName = "speedVariationFrequency"
+        }
+        displayName = "Speed Variation Frequency"
+        doc = """The frequency of the random changes of the wind speed."""
+    )
+
+    float3 physxForceFieldWind:directionVariation = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "directionVariation"
+        }
+        displayName = "Direction Variation"
+        doc = """The magnitude of the random changes of the wind direction in the world coordinate system."""
+    )
+
+    float3 physxForceFieldWind:directionVariationFrequency = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "directionVariationFrequency"
+        }
+        displayName = "Direction Variation Frequency"
+        doc = """The frequency of the random variations of the wind direction in the world coordinate system."""
+    )
+}
+
+class "PhysxForceFieldSpinAPI"
+(
+    doc = """A force field that applies forces to rotate rigid bodies around a line, defined by a 
+             spin axis, and varies with the function coefficients. Positive values rotate 
+             clockwise around the spin axis when looking along the axis. The net force on the 
+             rigid body is calculated using f = constant + linear * r + inverseSquare / r^2."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    vector3f physxForceFieldSpin:spinAxis = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "spinAxis"
+        }
+        displayName = "Spin Axis"
+        doc = """The axis around which rigid bodies are rotated in world coordinates."""
+    )
+
+    float physxForceFieldSpin:constant = 0.0 (
+        customData = {
+            string apiName = "constant"
+        }
+        displayName = "Constant"
+        doc = """constant applies a steady force."""
+    )
+
+    float physxForceFieldSpin:linear = 0.0 (
+        customData = {
+            string apiName = "linear"
+        }
+        displayName = "Linear"
+        doc = """linear sets a force that varies with distance to the axis."""
+    )
+
+    float physxForceFieldSpin:inverseSquare = 0.0 (
+        customData = {
+            string apiName = "inverseSquare"
+        }
+        displayName = "Inverse Square"
+        doc = """inverseSquare sets a force that varies with the reciprocal of the square of the distance to the axis."""
+    )
+}
+
+class "PhysxForceFieldRingAPI"
+(
+    doc = """A force field that applies forces to rotate rigid bodies around a ring, defined by a 
+             normal axis through the center of the ring and radius from that axis. The two sets of coefficients
+             describe the attraction force to the ring and the tangential force that rotated bodies around the ring.
+             The net force on the rigid body is calculated using 
+             f_ring = constant + linear * r + inverseSquare / r^2.
+             f_spin = spinConstant + spinLinear * r + spinInverseSquare / r^2."""
+    customData = {
+        token apiSchemaType = "multipleApply"
+        token propertyNamespacePrefix  = "physxForceField"
+    }
+    inherits = </APISchemaBase>
+    prepend apiSchemas = ["PhysxForceFieldAPI"]
+)
+{
+    vector3f physxForceFieldRing:normalAxis = (0.0, 0.0, 0.0) (
+        customData = {
+            string apiName = "normalAxis"
+        }
+        displayName = "Normal Axis"
+        doc = """The normal axis through the center of the ring in world coordinates."""
+    )
+
+    float physxForceFieldRing:radius = 0.0 (
+        customData = {
+            string apiName = "radius"
+        }
+        displayName = "Radius"
+        doc = """The distance from the normal axis to the center of the ring."""
+    )
+
+    float physxForceFieldRing:constant = 0.0 (
+        customData = {
+            string apiName = "constant"
+        }
+        displayName = "Constant"
+        doc = """constant applies a steady force that attracts bodies toward the ring."""
+    )
+
+    float physxForceFieldRing:linear = 0.0 (
+        customData = {
+            string apiName = "linear"
+        }
+        displayName = "Linear"
+        doc = """linear applies a force that attracts bodies toward the ring and varies with distance to the ring."""
+    )
+
+    float physxForceFieldRing:inverseSquare = 0.0 (
+        customData = {
+            string apiName = "inverseSquare"
+        }
+        displayName = "Inverse Square"
+        doc = """inverseSquare applies a force that attracts bodies toward the ring and varies with the reciprocal of the square of the distance to the ring."""
+    )
+
+    float physxForceFieldRing:spinConstant = 0.0 (
+        customData = {
+            string apiName = "spinConstant"
+        }
+        displayName = "Spin Constant"
+        doc = """spinConstant applies a steady force that rotates bodies around the ring."""
+    )
+
+    float physxForceFieldRing:spinLinear = 0.0 (
+        customData = {
+            string apiName = "spinLinear"
+        }
+        displayName = "Spin Linear"
+        doc = """spinLinear applies a force that rotates bodies around the ring and varies with distance to the ring."""
+    )
+
+    float physxForceFieldRing:spinInverseSquare = 0.0 (
+        customData = {
+            string apiName = "spinInverseSquare"
+        }
+        displayName = "Spin Inverse Square"
+        doc = """inverseSquare sets a force that rotates bodies around the ring and varies with the reciprocal of the square of the distance to the ring."""
+    )
+}

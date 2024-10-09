@@ -1,0 +1,27 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    endTimeCode = 100
+    metersPerUnit = 0.01
+    startTimeCode = 0
+    timeCodesPerSecond = 24
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def Mesh "meshCube" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxTriangleMeshCollisionAPI", "PhysxCookedDataAPI:triangleMesh"]
+    )
+    {
+        uniform bool doubleSided = 0
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 1, 2, 3, 1, 5, 6, 2, 3, 2, 6, 7, 0, 3, 7, 4, 1, 0, 4, 5, 5, 4, 7, 6]
+        uniform token physxTriangleMeshCollision:sdfBitsPerSubgridPixel = "BitsPerPixel8"
+        uniform float physxTriangleMeshCollision:sdfMargin = 0.1
+        uniform float physxTriangleMeshCollision:sdfNarrowBandThickness = 0.1
+        uniform int physxTriangleMeshCollision:sdfResolution = 10
+        uniform int physxTriangleMeshCollision:sdfSubgridResolution = 8
+        point3f[] points = [(20, -20, -20), (20, 20, -20), (20, 20, 20), (20, -20, 20), (-20, -20, -20), (-20, 20, -20), (-20, 20, 20), (-20, -20, 20)]
+    }
+}

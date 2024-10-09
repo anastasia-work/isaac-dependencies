@@ -1,0 +1,67 @@
+{
+    "nodes": {
+        "omni.physx.forcefields.ForceFieldConical": {
+            "description": "A conical force field that attracts and/or repels rigid bodies from a central point depending on the function coefficients. Positive values attract and negative values repel. The net force on the rigid body is calculated using f = constant + linear * r + inverseSquare / r^2, where r is the distance to the center. Forces can be attenuated based on their position relative to the cone central axis with the  linearFalloff and powerFalloff inputs.",
+            "version": 1,
+            "uiName": "Force Field: Conical",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldDrag": {
+            "description": "A force field that slows rigid bodies by generating a force that is opposite to their velocity direction using the forumula f = -linear * v - square * v^2.",
+            "version": 2,
+            "uiName": "Force Field: Drag",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldLinear": {
+            "description": "A linear force field that attracts and/or repels rigid bodies from a line, defined by a point and direction vector, depending on the function coefficients. Positive values attract and negative values repel. The net force on the rigid body is calculated using f = constant + linear * r + inverseSquare / r^2, where r is the distance to the closest point on the line.",
+            "version": 1,
+            "uiName": "Force Field: Linear",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldNoise": {
+            "description": "A force field that adds randomized motion to a rigid body.",
+            "version": 1,
+            "uiName": "Force Field: Noise",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldPlanar": {
+            "description": "A planar force field that attracts and/or repels rigid bodies from a plane, defined by a point and normal vector, depending on the function coefficients. Positive values attract and negative values repel. The net force on the rigid body is calculated using f = constant + linear * r + inverseSquare / r^2, where r is the distance to the closest point on the plane.",
+            "version": 2,
+            "uiName": "Force Field: Planar",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldRing": {
+            "description": "A force field that applies forces to rotate rigid bodies around a ring, defined by a normal axis through the center of the ring and radius from that axis. The two sets of coefficients describe the attraction force to the ring and the tangential force that rotated bodies around the ring. The net force on the rigid body is calculated using f_ring = constant + linear * r + inverseSquare / r^2. f_spin = spinConstant + spinLinear * r + spinInverseSquare / r^2.",
+            "version": 1,
+            "uiName": "Force Field: Ring",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldSpherical": {
+            "description": "A spherical force field that attracts and/or repels rigid bodies from a central point depending on the function coefficients. Positive values attract and negative values repel. The net force on the rigid body is calculated using f = constant + linear * r + inverseSquare / r^2, where r is the distance to the center.",
+            "version": 2,
+            "uiName": "Force Field: Spherical",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldSpin": {
+            "description": "A force field that applies forces to rotate rigid bodies around a line, defined by a spin axis, and varies with the function coefficients. Positive values rotate clockwise around the spin axis when looking along the axis. The net force on the rigid body is calculated using f = constant + linear * r + inverseSquare / r^2.",
+            "version": 1,
+            "uiName": "Force Field: Spin",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        },
+        "omni.physx.forcefields.ForceFieldWind": {
+            "description": "A force field that simulates an unsteady wind that pushes rigid bodies.",
+            "version": 1,
+            "uiName": "Force Field: Wind",
+            "extension": "omni.physx.forcefields",
+            "language": "C++"
+        }
+    }
+}

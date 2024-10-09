@@ -1,0 +1,172 @@
+{
+    "nodes": {
+        "omni.physx.graph.GenerateContacts": {
+            "description": "DEPRECATED - Use 'Generate Geometry Contacts'",
+            "version": 1,
+            "uiName": "(Deprecated) Generate Contacts",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.OnContactEventAdvanced": {
+            "description": "PhysX contact event triggered execution.",
+            "version": 1,
+            "uiName": "On Contact Event, Advanced",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.OnContactEventBasic": {
+            "description": "PhysX contact event triggered execution.",
+            "version": 1,
+            "uiName": "On Contact Event",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.ImmediateComputeBoundsOverlaps": {
+            "description": "Computes overlaps between pairs of axis aligned bounding boxes (broadphase)",
+            "version": 1,
+            "uiName": "Compute Bounds Overlaps",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.ImmediateComputeGeometryBounds": {
+            "description": "Computes bounding boxes for the input geometries (and cache cooking for future intersection tests)",
+            "version": 1,
+            "uiName": "Compute Geometry Bounds",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.ImmediateComputeGeometryOverlaps": {
+            "description": "Compute overlaps between geometries (currently supports meshes prims)",
+            "version": 1,
+            "uiName": "Compute Geometry Overlaps",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.ImmediateComputeGeometryPenetrations": {
+            "description": "Compute penetration depth and direction between geometries (currently supports meshes prims)",
+            "version": 1,
+            "uiName": "Compute Geometry Penetrations",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.ImmediateComputeMeshIntersectingFaces": {
+            "description": "Computes indices of intersecting faces between pairs of Meshes.",
+            "version": 1,
+            "uiName": "Compute Mesh Intersecting Faces",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.ImmediateGenerateGeometryContacts": {
+            "description": "Returns a list of contact points.",
+            "version": 1,
+            "uiName": "Generate Geometry Contacts",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryOverlapBoxAll": {
+            "description": "Returns a list of prim paths of all colliders that overlap the input box.",
+            "version": 1,
+            "uiName": "Overlap, Box, All",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryOverlapBoxAny": {
+            "description": "Checks whether any colliders overlap the query input box.",
+            "version": 1,
+            "uiName": "Overlap, Box, Any",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryOverlapPrimAll": {
+            "description": "Returns a list of prim paths of all colliders that overlap the input Prim.",
+            "version": 1,
+            "uiName": "Overlap, Prim, All",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryOverlapPrimAny": {
+            "description": "Checks whether any colliders overlap the query input Prim.",
+            "version": 1,
+            "uiName": "Overlap, Prim, Any",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryOverlapSphereAll": {
+            "description": "Returns a list of prim paths of all colliders that overlap the input sphere.",
+            "version": 1,
+            "uiName": "Overlap, Sphere, All",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryOverlapSphereAny": {
+            "description": "Checks whether any colliders overlap the query input sphere.",
+            "version": 1,
+            "uiName": "Overlap, Sphere, Any",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryRaycastAll": {
+            "description": "Returns a list of prim paths of all colliders that are hit by the input ray.",
+            "version": 1,
+            "uiName": "Raycast, All",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryRaycastAny": {
+            "description": "Returns whether any colliders are hit by the input ray.",
+            "version": 1,
+            "uiName": "Raycast, Any",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQueryRaycastClosest": {
+            "description": "Finds the closest collider that is hit by the input ray.",
+            "version": 1,
+            "uiName": "Raycast, Closest",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQuerySweepSphereAll": {
+            "description": "Returns a list of prim paths of all colliders that are hit by the input sweep.",
+            "version": 2,
+            "uiName": "Sweep, Sphere, All",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQuerySweepSphereAny": {
+            "description": "Returns whether any colliders are hit by the input sweep.",
+            "version": 1,
+            "uiName": "Sweep, Sphere, Any",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.SceneQuerySweepSphereClosest": {
+            "description": "Finds the closest collider that is hit by the input sweep.",
+            "version": 1,
+            "uiName": "Sweep, Sphere, Closest",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.OnTriggerCollider": {
+            "description": "Emits an event when a collider enters or leaves the volume of a Trigger.",
+            "version": 1,
+            "uiName": "On Trigger",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.VehicleGetDriveState": {
+            "description": "Retrieving drive related simulation state of an omni.physx vehicle",
+            "version": 1,
+            "uiName": "Get Vehicle Drive State",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        },
+        "omni.physx.graph.VehicleGetWheelState": {
+            "description": "Retrieving wheel related simulation state of an omni.physx vehicle",
+            "version": 1,
+            "uiName": "Get Wheel State",
+            "extension": "omni.physx.graph",
+            "language": "C++"
+        }
+    }
+}

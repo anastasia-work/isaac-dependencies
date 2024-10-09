@@ -1,0 +1,45 @@
+[package]
+title = "PhysX UI"
+description="Adds GUI elements for physics authoring."
+changelog="docs/CHANGELOG.md"
+repository = ""
+keywords = ["physics", "physx", "ui"]
+category = "internal"
+
+[dependencies]
+"omni.ui" = {}
+"omni.usdphysics.ui" = {}
+"omni.physx" = {}
+"omni.timeline" = {}
+"omni.debugdraw" = {}
+"omni.kit.viewport.window" = {}
+"omni.kit.window.property" = {}
+"omni.kit.viewport.utility" = {}
+"omni.kit.window.preferences" = {}
+"omni.kit.context_menu" = {}
+"omni.kit.widget.settings" = {}
+"omni.kit.window.popup_dialog" = {}
+"omni.kit.property.usd" = {}
+"omni.usd" = {}
+"omni.kit.commands" = {}
+"omni.physx.commands" = {}
+"omni.kit.notification_manager" = {}
+"omni.client" = {}
+"omni.ui.scene" = {}
+"omni.kit.actions.core" = {}
+"omni.kit.manipulator.tool.snap" = {}
+"omni.kit.manipulator.transform" = {}
+"usdrt.scenegraph" = {}
+"omni.kit.hotkeys.core" = { optional = true }
+
+[[python.module]]
+name = "omni.physxui"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+dependencies = [
+"omni.kit.renderer.core"
+]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

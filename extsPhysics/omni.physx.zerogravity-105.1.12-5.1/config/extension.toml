@@ -1,0 +1,41 @@
+[package]
+title = "Zero Gravity"
+description ="User-guided physically accurate placement of geometry in a USD stage."
+authors = ["NVIDIA"]
+keywords = ["physics", "physx", "placement", "editing", "zero", "gravity"]
+category = "simulation"
+changelog="docs/CHANGELOG.md"
+readme = "README.md"
+icon = "resources/images/icon.png"
+preview_image = "resources/images/preview_image.png"
+
+[[python.module]]
+name = "omni.physxzerogravity"
+
+[dependencies]
+"omni.physx" = {}
+"omni.kit.menu.utils" = {}
+"omni.kit.window.toolbar" = {}
+"omni.kit.widget.stage" = {}
+"omni.ui" = {}
+"omni.debugdraw" = {}
+"omni.kit.viewport.utility" = {}
+"omni.kit.commands" = {}
+"omni.kit.notification_manager" = {}
+"omni.kit.manipulator.prim" = {}
+"omni.kit.manipulator.selector" = {}
+"omni.kit.manipulator.selection" = {}
+"omni.kit.viewport.window" = {}
+"usdrt.scenegraph" = {}
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[settings]
+persistent.exts."omni.kit.manipulator.selector".orders."omni.physxzerogravity" = -9  # Add a setting to define the priority of this manipulator
+
+[[test]]
+dependencies = [
+   "omni.kit.renderer.core",
+]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

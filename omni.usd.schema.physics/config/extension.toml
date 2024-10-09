@@ -1,0 +1,18 @@
+[core]
+reloadable = false
+# Load at the start, load all schemas with order -100 (with order -1000 the USD libs are loaded)
+order = -100
+
+[package]
+category = "Internal"
+title = "USD Physics schema"
+description="USD Physics schema"
+
+[dependencies]
+"omni.usd.libs" = {}
+
+[[python.module]]
+name = "usd.schema.physics"
+
+[[test]]
+waiver = "USD Schema, tested externally"

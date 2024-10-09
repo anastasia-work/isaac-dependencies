@@ -1,0 +1,13 @@
+{
+    "cache_all":
+    [
+        {
+            "cmd": "OpenStage",
+            "event_data_as_kwargs": true
+        },
+        {
+            "cmd": "ZeroGravityCacheAllCommand",
+            "deps": ["omni.physx.zerogravity"]
+        }
+    ]
+}

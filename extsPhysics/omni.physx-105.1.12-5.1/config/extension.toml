@@ -1,0 +1,34 @@
+[package]
+title = "PhysX Core"
+description="PhysX 5 integration code."
+changelog="docs/CHANGELOG.md"
+readme = "docs/README.md"
+
+repository = ""
+keywords = ["physics", "physx"]
+category = "internal"
+
+[dependencies]
+"omni.usd.libs" = {}
+"omni.usd.schema.physics" = {}
+"omni.usd.schema.physx" = {}
+"omni.usdphysics" = {}
+"usdrt.scenegraph" = {}
+"omni.gpucompute.plugins" = {}
+"omni.usd" = {optional=true}
+"omni.physx.cooking" = {}
+
+[[python.module]]
+name = "omni.physx"
+
+[[python.module]]
+name = "omni.physx.scripts"
+
+[[native.plugin]]
+path = "bin/omni.physx.plugin"
+
+[[test]]
+dependencies = [
+   "omni.usd",
+]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

@@ -1,0 +1,40 @@
+[package]
+version = "0.1.0"
+
+title = "Tensor Interface for Physics Simulations"
+repository = ""
+keywords = ["omniverse", "kit", "physics", "tensors"]
+
+[dependencies]
+"omni.usd.libs" = {}
+"omni.usd.schema.physics" = {}
+
+[[native.plugin]]
+path = "bin/*.plugin"
+recursive = false
+
+[[python.module]]
+# !!! make sure there are no Python packages in omni.physics namespace already, otherwise name resolution might fail
+name = "omni.physics.tensors"
+
+[python.pipapi]
+requirements = [
+
+    # NOTE: We don't use pipapi currently due to package management issues.  We use a virtual env instead.
+    #       All Python dependencies should be listed in python_requirements.txt.
+    #       To make the packages available at runtime, enable the omni.gym.prerequisites extension in the app config.
+
+    #"numpy",
+    #"torch==1.8.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html",
+    #"tensorflow==2.2.0",
+]
+
+# no idea what it needs
+[[test]]
+dependencies = [
+"omni.usd.libs",
+"omni.usd.schema.physics",
+"omni.usd.schema.physx",
+"omni.usd.schema.audio",
+"omni.usd.schema.semantics",
+]

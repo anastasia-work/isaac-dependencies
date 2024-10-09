@@ -1,0 +1,42 @@
+[package]
+category = "Internal"
+authors = ["NVIDIA"]
+title = "Zero Gravity Tests"
+description="Automated python tests for Zero Gravity extension."
+repository = ""
+keywords = ["physx", "placement", "zero", "gravity"]
+changelog="docs/CHANGELOG.md"
+
+[dependencies]
+"omni.physx.zerogravity" = {}
+"omni.physx.tests" = {}
+"omni.kit.stage_templates" = {}
+"omni.ui" = {}
+
+[[python.module]]
+name = "omni.physxzerogravitytests"
+
+[[test]]
+dependencies = [
+    "omni.assets.plugins",
+    "omni.kit.renderer.core",
+    "omni.usd.libs",
+    "omni.usd",
+    "omni.kit.ui_test"
+]
+args = [
+    "--no-window",
+    "--/app/asyncRendering=false",
+    "--/app/file/ignoreUnsavedOnExit=true",
+    "--/renderer/multiGpu/autoEnable=false",
+    "--/app/profilerBackend=\"\"",
+    "--/rtx/materialDb/syncLoads=true",
+    "--/omni.kit.plugin/syncUsdLoads=true",
+    "--/rtx/hydra/materialSyncLoads=true",
+    "--/app/renderer/resolution/width=64",
+    "--/app/renderer/resolution/height=64",
+    "--/rtx/rendermode=\"rtx\""
+]
+timeout = 1200
+pyCoverageFilter = ["omni.physxzerogravity"]
+pyCoverageThreshold = 0

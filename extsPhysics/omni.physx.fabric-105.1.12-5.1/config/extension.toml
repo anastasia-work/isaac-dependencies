@@ -1,0 +1,33 @@
+[package]
+title = "PhysX Fabric"
+description="Omni PhysX Fabric output"
+changelog="docs/CHANGELOG.md"
+repository = ""
+keywords = ["physics", "physx", "fabric"]
+category = "Simulation"
+authors = ["NVIDIA"]
+readme = "docs/README.md"
+
+[dependencies]
+"omni.physx" = { }
+"usdrt.scenegraph" = {}
+"omni.graph.core" = {optional=true}
+"omni.ui" = {optional=true}
+"omni.kit.window.preferences" = {optional=true}
+"omni.kit.widget.settings" = {optional=true}
+
+
+[[python.module]]
+name = "omni.physxfabric"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+dependencies = [
+   "omni.kit.renderer.core",
+   "omni.ui",
+   "omni.kit.window.preferences",
+   "omni.kit.widget.settings"
+]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

@@ -1,0 +1,743 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (50000, 0, 0)
+                double radius = 500
+            }
+            dictionary Perspective = {
+                double3 position = (350.9194194282701, 350.9194194282701, 350.9194229865598)
+                double3 target = (-0.0000039780393876753806, -0.000003978039217145124, 0.000007956076274240331)
+            }
+            dictionary Right = {
+                double3 position = (0, -50000, 0)
+                double radius = 500
+            }
+            dictionary Top = {
+                double3 position = (0, 0, 50000)
+                double radius = 500
+            }
+            string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary omni_layer = {
+            string authoring_layer = "./ogn_scene_queries.usda"
+            dictionary muteness = {
+            }
+        }
+        dictionary renderSettings = {
+            float3 "rtx:debugView:pixelDebug:textColor" = (0, 1e18, 0)
+            bool "rtx:ecoMode:enabled" = 1
+            bool "rtx:indirectDiffuse:enabled" = 0
+            float3 "rtx:post:backgroundZeroAlpha:backgroundDefaultColor" = (0, 0, 0)
+            float3 "rtx:post:colorcorr:contrast" = (1, 1, 1)
+            float3 "rtx:post:colorcorr:gain" = (1, 1, 1)
+            float3 "rtx:post:colorcorr:gamma" = (1, 1, 1)
+            float3 "rtx:post:colorcorr:offset" = (0, 0, 0)
+            float3 "rtx:post:colorcorr:saturation" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:blackpoint" = (0, 0, 0)
+            float3 "rtx:post:colorgrad:contrast" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:gain" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:gamma" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:lift" = (0, 0, 0)
+            float3 "rtx:post:colorgrad:multiply" = (1, 1, 1)
+            float3 "rtx:post:colorgrad:offset" = (0, 0, 0)
+            float3 "rtx:post:colorgrad:whitepoint" = (1, 1, 1)
+            float3 "rtx:post:lensDistortion:lensFocalLengthArray" = (10, 30, 50)
+            float3 "rtx:post:lensFlares:anisoFlareFalloffX" = (450, 475, 500)
+            float3 "rtx:post:lensFlares:anisoFlareFalloffY" = (10, 10, 10)
+            float3 "rtx:post:lensFlares:cutoffPoint" = (2, 2, 2)
+            float3 "rtx:post:lensFlares:haloFlareFalloff" = (10, 10, 10)
+            float3 "rtx:post:lensFlares:haloFlareRadius" = (75, 75, 75)
+            float3 "rtx:post:lensFlares:isotropicFlareFalloff" = (50, 50, 50)
+            float3 "rtx:raytracing:inscattering:singleScatteringAlbedo" = (0.9, 0.9, 0.9)
+            float3 "rtx:raytracing:inscattering:transmittanceColor" = (0.5, 0.5, 0.5)
+            double "rtx:sceneDb:ambientLightIntensity" = 0.3
+        }
+    }
+    defaultPrim = "World"
+    doc = """Generated from Composed Stage of root layer D:\\dev\\git\\physics\\data\\usd\\assets\\ogn_scene_queries.usda
+"""
+    endTimeCode = 100
+    metersPerUnit = 0.01
+    startTimeCode = 0
+    timeCodesPerSecond = 60
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def OmniGraph "SceneQueryDemo"
+    {
+        token evaluationMode = "Automatic"
+        token evaluator:type = "execution"
+        token fabricCacheBacking = "Shared"
+        int2 fileFormatVersion = (1, 6)
+        token pipelineStage = "pipelineStageSimulation"
+
+        def OmniGraphNode "overlap_box_all" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:dimensions
+            token inputs:dimensions.connect = </World/SceneQueryDemo/constant_float3.inputs:value>
+            custom uint inputs:execIn
+            uint inputs:execIn.connect = </World/SceneQueryDemo/sweep_sphere_all.outputs:execOut>
+            custom token inputs:position
+            token inputs:position.connect = </World/SceneQueryDemo/constant_float3_01.inputs:value>
+            custom token inputs:rotation
+            token inputs:rotation.connect = </World/SceneQueryDemo/make_3_vector_01.outputs:tuple>
+            token node:type = "omni.physx.graph.SceneQueryOverlapBoxAll"
+            int node:typeVersion = 1
+            custom token[] outputs:bodyPrimPaths = []
+            custom token[] outputs:colliderPrimPaths = []
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "minimized"
+            uniform float2 ui:nodegraph:node:pos = (544.6149, -7.064886)
+        }
+
+        def OmniGraphNode "constant_float3" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom float3 inputs:value = (25, 25, 25)
+            token node:type = "omni.graph.nodes.ConstantFloat3"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (277.42126, -16.089827)
+        }
+
+        def OmniGraphNode "constant_float3_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom float3 inputs:value = (0, 0, 0)
+            token node:type = "omni.graph.nodes.ConstantFloat3"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-46.857513, -94.17256)
+        }
+
+        def OmniGraphNode "on_tick" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:framePeriod = 0
+            custom bool inputs:onlyPlayback = 1
+            token node:type = "omni.graph.action.OnTick"
+            int node:typeVersion = 1
+            custom double outputs:absoluteSimTime
+            custom double outputs:deltaSeconds
+            custom double outputs:frame
+            custom bool outputs:isPlaying
+            custom uint outputs:tick (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom double outputs:time
+            custom double outputs:timeSinceStart
+            custom double state:accumulatedSeconds = 0
+            custom uint state:frameCount = 0
+            uniform token ui:nodegraph:node:expansionState = "minimized"
+            uniform float2 ui:nodegraph:node:pos = (-520.13745, -186.13142)
+        }
+
+        def OmniGraphNode "array_find_value" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:array
+            token inputs:array.connect = </World/SceneQueryDemo/overlap_sphere_all.outputs:colliderPrimPaths>
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/for_each_loop_01.outputs:element>
+            token node:type = "omni.graph.nodes.ArrayFindValue"
+            int node:typeVersion = 1
+            custom int outputs:index
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1298.0077, 357.2924)
+        }
+
+        def OmniGraphNode "find_prims" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:ignoreSystemPrims = 0
+            custom token inputs:namePrefix = "actor"
+            custom token inputs:pathPattern
+            token inputs:pathPattern.connect = </World/SceneQueryDemo/append_string_01.outputs:value>
+            custom bool inputs:recursive = 1
+            custom string inputs:requiredAttributes = ""
+            custom token inputs:requiredRelationship
+            custom string inputs:requiredRelationshipTarget = ""
+            custom token inputs:rootPrimPath
+            custom token inputs:type = "*"
+            token node:type = "omni.graph.nodes.FindPrims"
+            int node:typeVersion = 2
+            custom token[] outputs:primPaths = []
+            custom bool state:ignoreSystemPrims
+            custom token state:inputType
+            custom token state:namePrefix
+            custom token state:pathPattern
+            custom bool state:recursive
+            custom string state:requiredAttributes
+            custom token state:requiredRelationship
+            custom string state:requiredRelationshipTarget
+            custom token state:rootPrimPath
+            uniform token ui:nodegraph:node:expansionState = "minimized"
+            uniform float2 ui:nodegraph:node:pos = (1001.8317, 316.20563)
+
+            def Output "outputs_prims"
+            {
+            }
+        }
+
+        def OmniGraphNode "for_each_loop_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:arrayIn
+            token inputs:arrayIn.connect = </World/SceneQueryDemo/find_prims.outputs:primPaths>
+            custom uint inputs:execIn
+            uint inputs:execIn.connect = </World/SceneQueryDemo/counter.outputs:execOut>
+            token node:type = "omni.graph.action.ForEach"
+            int node:typeVersion = 1
+            custom int outputs:arrayIndex
+            custom token outputs:element
+            custom uint outputs:finished (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom uint outputs:loopBody (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1005.599, 97.75731)
+        }
+
+        def OmniGraphNode "overlap_sphere_all" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            uint inputs:execIn.connect = </World/SceneQueryDemo/overlap_box_all.outputs:execOut>
+            custom token inputs:position
+            token inputs:position.connect = </World/SceneQueryDemo/constant_float3_01.inputs:value>
+            custom token inputs:radius
+            token inputs:radius.connect = </World/SceneQueryDemo/constant_float.inputs:value>
+            token node:type = "omni.physx.graph.SceneQueryOverlapSphereAll"
+            int node:typeVersion = 1
+            custom token[] outputs:bodyPrimPaths = []
+            custom token[] outputs:colliderPrimPaths = []
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            uniform token ui:nodegraph:node:expansionState = "minimized"
+            uniform float2 ui:nodegraph:node:pos = (542.71094, 269.44598)
+        }
+
+        def OmniGraphNode "constant_float" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom float inputs:value = 25
+            token node:type = "omni.graph.nodes.ConstantFloat"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (326.70172, 378.73434)
+        }
+
+        def OmniGraphNode "cos" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/multiply.outputs:product>
+            token node:type = "omni.graph.nodes.Cos"
+            int node:typeVersion = 1
+            custom token outputs:value
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (68.592865, -420.35944)
+        }
+
+        def OmniGraphNode "sin" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/multiply.outputs:product>
+            token node:type = "omni.graph.nodes.Sin"
+            int node:typeVersion = 1
+            custom token outputs:value
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (69.477325, -311.3603)
+        }
+
+        def OmniGraphNode "make_3_vector" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:x
+            token inputs:x.connect = </World/SceneQueryDemo/cos.outputs:value>
+            custom token inputs:y
+            token inputs:y.connect = </World/SceneQueryDemo/sin.outputs:value>
+            custom token inputs:z
+            token node:type = "omni.graph.nodes.MakeVector3"
+            int node:typeVersion = 1
+            custom token outputs:tuple
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (282.37387, -370.64148)
+        }
+
+        def OmniGraphNode "constant_int" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom int inputs:value = -1
+            token node:type = "omni.graph.nodes.ConstantInt"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1038.9244, -192.48337)
+        }
+
+        def OmniGraphNode "compare" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:a
+            token inputs:a.connect = </World/SceneQueryDemo/array_find_value.outputs:index>
+            custom token inputs:b
+            token inputs:b.connect = </World/SceneQueryDemo/constant_int.inputs:value>
+            custom token inputs:operation = "==" (
+                allowedTokens = [">", "<", ">=", "<=", "==", "!="]
+            )
+            token node:type = "omni.graph.nodes.Compare"
+            int node:typeVersion = 1
+            custom token outputs:result
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1534.6398, 304.40695)
+        }
+
+        def OmniGraphNode "write_prim_attribute_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            uint inputs:execIn.connect = </World/SceneQueryDemo/for_each_loop_01.outputs:loopBody>
+            custom token inputs:name = "primvars:displayColor"
+            custom rel inputs:prim
+            custom token inputs:primPath
+            token inputs:primPath.connect = </World/SceneQueryDemo/for_each_loop_01.outputs:element>
+            custom bool inputs:usdWriteBack = 1
+            custom bool inputs:usePath = 1
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/make_array_01.outputs:array>
+            token node:type = "omni.graph.nodes.WritePrimAttribute"
+            int node:typeVersion = 2
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom bool state:correctlySetup = 0
+            custom uint64 state:destAttrib
+            custom uint64 state:destPath
+            custom uint64 state:destPathToken
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (2149.8083, 134.64651)
+        }
+
+        def OmniGraphNode "make_array_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom int inputs:arraySize = 1
+            custom token inputs:arrayType = "auto" (
+                allowedTokens = ["auto", "bool[]", "double[]", "float[]", "half[]", "int[]", "int64[]", "token[]", "uchar[]", "uint[]", "uint64[]", "double[2][]", "double[3][]", "double[4][]", "matrixd[3][]", "matrixd[4][]", "float[2][]", "float[3][]", "float[4][]", "half[2][]", "half[3][]", "half[4][]", "int[2][]", "int[3][]", "int[4][]"]
+            )
+            custom token inputs:input0
+            token inputs:input0.connect = </World/SceneQueryDemo/select_if.outputs:result>
+            token node:type = "omni.graph.nodes.ConstructArray"
+            int node:typeVersion = 1
+            custom token outputs:array
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (2154.0398, -1.2631578)
+        }
+
+        def OmniGraphNode "array_find_value_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:array
+            token inputs:array.connect = </World/SceneQueryDemo/overlap_box_all.outputs:colliderPrimPaths>
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/for_each_loop_01.outputs:element>
+            token node:type = "omni.graph.nodes.ArrayFindValue"
+            int node:typeVersion = 1
+            custom int outputs:index
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1291.943, -19.343824)
+        }
+
+        def OmniGraphNode "compare_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:a
+            token inputs:a.connect = </World/SceneQueryDemo/array_find_value_01.outputs:index>
+            custom token inputs:b
+            token inputs:b.connect = </World/SceneQueryDemo/constant_int.inputs:value>
+            custom token inputs:operation = "==" (
+                allowedTokens = [">", "<", ">=", "<=", "==", "!="]
+            )
+            token node:type = "omni.graph.nodes.Compare"
+            int node:typeVersion = 1
+            custom token outputs:result
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1521.5553, -77.12163)
+        }
+
+        def OmniGraphNode "array_find_value_02" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:array
+            token inputs:array.connect = </World/SceneQueryDemo/sweep_sphere_all.outputs:colliderPrimPaths>
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/for_each_loop_01.outputs:element>
+            token node:type = "omni.graph.nodes.ArrayFindValue"
+            int node:typeVersion = 1
+            custom int outputs:index
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1290.9174, -364.82144)
+        }
+
+        def OmniGraphNode "compare_02" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:a
+            token inputs:a.connect = </World/SceneQueryDemo/array_find_value_02.outputs:index>
+            custom token inputs:b
+            token inputs:b.connect = </World/SceneQueryDemo/constant_int.inputs:value>
+            custom token inputs:operation = "==" (
+                allowedTokens = [">", "<", ">=", "<=", "==", "!="]
+            )
+            token node:type = "omni.graph.nodes.Compare"
+            int node:typeVersion = 1
+            custom token outputs:result
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1532.7102, -415.0781)
+        }
+
+        def OmniGraphNode "sweep_sphere_all" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom bool inputs:bothSides = 0
+            custom token inputs:direction
+            token inputs:direction.connect = </World/SceneQueryDemo/make_3_vector.outputs:tuple>
+            custom uint inputs:execIn
+            uint inputs:execIn.connect = </World/SceneQueryDemo/on_tick.outputs:tick>
+            custom token inputs:origin
+            token inputs:origin.connect = </World/SceneQueryDemo/constant_float3_01.inputs:value>
+            custom token inputs:radius
+            token inputs:radius.connect = </World/SceneQueryDemo/constant_float_01.inputs:value>
+            custom bool inputs:sortByDistance = 0
+            custom token inputs:sweepRange
+            token node:type = "omni.physx.graph.SceneQuerySweepSphereAll"
+            int node:typeVersion = 2
+            custom token[] outputs:bodyPrimPaths = []
+            custom token[] outputs:colliderPrimPaths = []
+            custom float[] outputs:distances = []
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom int[] outputs:faceIndexes = []
+            custom token[] outputs:materialPaths = []
+            custom normal3f[] outputs:normals = []
+            custom point3f[] outputs:positions = []
+            uniform token ui:nodegraph:node:expansionState = "minimized"
+            uniform float2 ui:nodegraph:node:pos = (545.0238, -320.29044)
+        }
+
+        def OmniGraphNode "constant_float_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom float inputs:value = 2
+            token node:type = "omni.graph.nodes.ConstantFloat"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (309.2937, -193.66798)
+        }
+
+        def OmniGraphNode "multiply" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:a
+            token inputs:a.connect = </World/SceneQueryDemo/constant_float_02.inputs:value>
+            custom token inputs:b
+            token inputs:b.connect = </World/SceneQueryDemo/on_tick.outputs:absoluteSimTime>
+            token node:type = "omni.graph.nodes.Multiply"
+            int node:typeVersion = 1
+            custom token outputs:product
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-139.57037, -364.54865)
+        }
+
+        def OmniGraphNode "constant_float_02" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom float inputs:value = 30
+            token node:type = "omni.graph.nodes.ConstantFloat"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (-350.67432, -407.30655)
+        }
+
+        def OmniGraphNode "make_3_vector_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:x
+            custom token inputs:y
+            custom token inputs:z
+            token inputs:z.connect = </World/SceneQueryDemo/multiply_01.outputs:product>
+            token node:type = "omni.graph.nodes.MakeVector3"
+            int node:typeVersion = 1
+            custom token outputs:tuple
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (278.23376, 82.49305)
+        }
+
+        def OmniGraphNode "multiply_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:a
+            token inputs:a.connect = </World/SceneQueryDemo/on_tick.outputs:absoluteSimTime>
+            custom token inputs:b
+            token inputs:b.connect = </World/SceneQueryDemo/constant_float_03.inputs:value>
+            token node:type = "omni.graph.nodes.Multiply"
+            int node:typeVersion = 1
+            custom token outputs:product
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (64.16023, 82.32167)
+        }
+
+        def OmniGraphNode "constant_float_03" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom float inputs:value = -60
+            token node:type = "omni.graph.nodes.ConstantFloat"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "minimized"
+            uniform float2 ui:nodegraph:node:pos = (-153.54366, 163.4853)
+        }
+
+        def OmniGraphNode "select_if" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:condition
+            token inputs:condition.connect = </World/SceneQueryDemo/compare_02.outputs:result>
+            custom token inputs:ifFalse
+            token inputs:ifFalse.connect = </World/SceneQueryDemo/constant_color3f.inputs:value>
+            custom token inputs:ifTrue
+            token inputs:ifTrue.connect = </World/SceneQueryDemo/select_if_01.outputs:result>
+            token node:type = "omni.graph.nodes.SelectIf"
+            int node:typeVersion = 1
+            custom token outputs:result
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1822.9025, -298.99258)
+        }
+
+        def OmniGraphNode "constant_color3f" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom color3f inputs:value = (2, 2, 0)
+            token node:type = "omni.graph.nodes.ConstantColor3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1540.5735, -263.12903)
+        }
+
+        def OmniGraphNode "select_if_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:condition
+            token inputs:condition.connect = </World/SceneQueryDemo/compare_01.outputs:result>
+            custom token inputs:ifFalse
+            token inputs:ifFalse.connect = </World/SceneQueryDemo/constant_color3f_01.inputs:value>
+            custom token inputs:ifTrue
+            token inputs:ifTrue.connect = </World/SceneQueryDemo/select_if_02.outputs:result>
+            token node:type = "omni.graph.nodes.SelectIf"
+            int node:typeVersion = 1
+            custom token outputs:result
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1826.7957, -3.721427)
+        }
+
+        def OmniGraphNode "constant_color3f_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom color3f inputs:value = (0, 1.5699999, 0)
+            token node:type = "omni.graph.nodes.ConstantColor3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1523.3176, 79.395485)
+        }
+
+        def OmniGraphNode "constant_color3f_02" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom color3f inputs:value = (2, 0.05, 0.05)
+            token node:type = "omni.graph.nodes.ConstantColor3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1533.0498, 454.86084)
+        }
+
+        def OmniGraphNode "select_if_02" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:condition
+            token inputs:condition.connect = </World/SceneQueryDemo/compare.outputs:result>
+            custom token inputs:ifFalse
+            token inputs:ifFalse.connect = </World/SceneQueryDemo/constant_color3f_02.inputs:value>
+            custom token inputs:ifTrue
+            token inputs:ifTrue.connect = </World/SceneQueryDemo/constant_color3f_03.inputs:value>
+            token node:type = "omni.graph.nodes.SelectIf"
+            int node:typeVersion = 1
+            custom token outputs:result
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1825.9838, 307.89346)
+        }
+
+        def OmniGraphNode "constant_color3f_03" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom color3f inputs:value = (0.15, 0.15, 2)
+            token node:type = "omni.graph.nodes.ConstantColor3f"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1540.8672, 641.0575)
+        }
+
+        def OmniGraphNode "constant_int_02" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom int inputs:value = 10
+            token node:type = "omni.graph.nodes.ConstantInt"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (561.5562, 632.6736)
+        }
+
+        def OmniGraphNode "counter" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom uint inputs:execIn
+            uint inputs:execIn.connect = </World/SceneQueryDemo/overlap_sphere_all.outputs:execOut>
+            custom uint inputs:reset
+            token node:type = "omni.graph.action.Counter"
+            int node:typeVersion = 1
+            custom int outputs:count
+            custom uint outputs:execOut (
+                customData = {
+                    bool isExecution = 1
+                }
+            )
+            custom int state:count
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (771.91656, 462.66815)
+        }
+
+        def OmniGraphNode "modulo_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:a
+            token inputs:a.connect = </World/SceneQueryDemo/counter.outputs:count>
+            custom token inputs:b (
+                customData = {
+                    dictionary omni = {
+                        dictionary graph = {
+                            int attrValue = 0
+                            string resolvedType = "int"
+                        }
+                    }
+                }
+            )
+            token inputs:b.connect = </World/SceneQueryDemo/constant_int_02.inputs:value>
+            token node:type = "omni.graph.nodes.Modulo"
+            int node:typeVersion = 1
+            custom token outputs:result
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (769.19446, 613.71027)
+        }
+
+        def OmniGraphNode "to_token_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/modulo_01.outputs:result>
+            token node:type = "omni.graph.nodes.ToToken"
+            int node:typeVersion = 1
+            custom token outputs:converted
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1001.819, 594.9941)
+        }
+
+        def OmniGraphNode "append_string_01" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:suffix
+            token inputs:suffix.connect = </World/SceneQueryDemo/to_token_01.outputs:converted>
+            custom token inputs:value
+            token inputs:value.connect = </World/SceneQueryDemo/constant_token.inputs:value>
+            token node:type = "omni.graph.nodes.AppendString"
+            int node:typeVersion = 1
+            custom token outputs:value
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1004.5351, 460.79446)
+        }
+
+        def OmniGraphNode "constant_token" (
+            apiSchemas = ["NodeGraphNodeAPI"]
+        )
+        {
+            custom token inputs:value = "*actor*"
+            token node:type = "omni.graph.nodes.ConstantToken"
+            int node:typeVersion = 1
+            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform float2 ui:nodegraph:node:pos = (1002.6328, 711.9481)
+        }
+    }
+}
+

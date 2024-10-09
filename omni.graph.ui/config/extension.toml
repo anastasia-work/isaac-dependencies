@@ -1,0 +1,88 @@
+[package]
+title = "OmniGraph UI"
+version = "1.48.0"
+category = "Graph"
+feature = true
+readme = "docs/README.md"
+changelog = "docs/CHANGELOG.md"
+description = "Contains all of the UI specific to the OmniGraph."
+preview_image = "data/preview.png"
+repository = ""
+keywords = ["kit", "omnigraph", "ui", "editor"]
+writeTarget.kit = true
+
+# The location of this module's python scripts
+[[python.module]]
+name = "omni.graph.ui"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+recursive = false
+
+# Watch the .ogn files for hot reloading (only works for Python files)
+[fswatcher.patterns]
+include = ["*.ogn", "*.py"]
+exclude = ["Ogn*Database.py"]
+
+# In addition to using the OmniGraph code the editor functionality is used for the node description editor
+[dependencies]
+"omni.debugdraw" = {}
+"omni.graph" = {}
+"omni.graph.tools" = {}
+"omni.inspect" = {}
+"omni.kit.commands" = {}
+"omni.kit.widget.prompt" = {}
+"omni.kit.widget.settings" = {}
+"omni.kit.widget.text_editor" = {} # For use in node template UI
+"omni.kit.widget.stage" = {optional = true}
+"omni.kit.window.filepicker" = {}
+"omni.kit.viewport.utility" = {}
+"omni.ui" = {}
+"omni.ui.scene" = {}
+"omni.ui_query" = {}
+"omni.usd" = {}
+"omni.kit.pip_archive" = {}
+"omni.kit.window.property" = {}
+"omni.kit.property.usd" = {}
+"omni.kit.menu.utils" = {}
+"omni.kit.window.preferences" = {}
+"omni.kit.window.extensions" = {optional = true}
+"omni.kit.stage_templates" = {}
+"omni.timeline" = {}
+
+[[test]]
+samplingFactor = 0.2  # run 20% of tests, after ~5 runs (1/0.2) all tests will have completed
+
+args = [
+    "--/renderer/enabled=pxr",
+    "--/renderer/active=pxr",
+    "--/renderer/multiGpu/enabled=false",
+    "--/renderer/multiGpu/autoEnable=false", # Disable mGPU with PXR due to OM-51026, OM-53611
+    "--/renderer/multiGpu/maxGpuCount=1",
+    "--/app/asyncRendering=false",
+    "--/app/window/dpiScaleOverride=1.0",
+    "--/app/window/scaleToMonitor=false",
+    "--/app/file/ignoreUnsavedOnExit=true",
+    "--no-window"
+]
+dependencies = [
+    "omni.graph.action",
+    "omni.graph.nodes",
+    "omni.hydra.pxr",
+    "omni.kit.test_suite.helpers",
+    "omni.kit.ui_test",
+    "omni.kit.window.viewport",
+ ]
+
+pythonTests.unreliable = [
+    "*test_open_and_close_all_omnigraph_ui", # OM-27559
+    "*test_omnigraph_ui_menu", # OM-27559
+]
+
+[documentation]
+pages = [
+    "docs/Overview.md",
+    "docs/Pixel_perfect-LICENSE.md",
+    "docs/prettycons-LICENSE.md",
+    "docs/CHANGELOG.md",
+]

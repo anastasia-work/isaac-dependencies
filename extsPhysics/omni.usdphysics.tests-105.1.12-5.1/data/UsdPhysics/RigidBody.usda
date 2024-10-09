@@ -1,0 +1,31 @@
+#usda 1.0
+
+def Xform "World"
+{
+    def Cube "BoxActor" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI"]
+    )
+    {
+        #optional nonzero starting velocities.  
+        #All other physics behavior is left at defaults.
+        vector3f physics:velocity = (2, 1, 2)
+        vector3f physics:angularVelocity = (1, 0, 0)
+        
+        color3f[] primvars:displayColor = [(0.2784314, 0.4117647, 1)]
+        double size = 25
+        double3 xformOp:translate = (0, 0, 500)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Cube "Ground" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        #scale the cube to be flat
+        float3 xformOp:scale = (750, 750, 10)
+        uniform token[] xformOpOrder = ["xformOp:scale"]
+    }
+
+}
+

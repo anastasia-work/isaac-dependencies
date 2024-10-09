@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33">
+  <g id="plot_downstream" data-name="plot downstream" transform="translate(-11594 1168)">
+    <rect id="Rectangle_678" data-name="Rectangle 678" width="33" height="33" transform="translate(11594 -1168)" fill="none"/>
+    <g id="Group_2847" data-name="Group 2847" transform="translate(11598.927 -1145.266) rotate(-90)">
+      <path id="Path_3729" data-name="Path 3729" d="M12.521,7.581l.052.242v.239l-.027.08-.052.107-.052.107-.107.08L6.846,14l-.132.107-.107.08-.159.055H6.154l-.159-.055-.135-.08L5.755,14,.239,8.435l-.08-.08L.08,8.249.027,8.142,0,8.062V7.823l.08-.242.135-.239.132-.159L.56,7.1l.211-.027H3.943V0H8.63V7.076h3.144l.266.027.187.08.159.159Z" transform="translate(0 0)" fill="#ccc" fill-rule="evenodd"/>
+    </g>
+    <g id="Rectangle_1078" data-name="Rectangle 1078" transform="translate(11598.676 -1141.365) rotate(-90)" fill="none" stroke="#ccc" stroke-width="1">
+      <rect width="20.269" height="23.647" rx="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="19.269" height="22.647" rx="2.5" fill="none"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33">
+  <g id="plot_both_stream" data-name="plot both stream" transform="translate(-11594 1168)">
+    <rect id="Rectangle_678" data-name="Rectangle 678" width="33" height="33" transform="translate(11594 -1168)" fill="none"/>
+    <g id="Group_2849" data-name="Group 2849" transform="translate(11612.47 -1160.2) rotate(90)">
+      <path id="Path_3729" data-name="Path 3729" d="M11.859,6.233l.049.229v.226l-.026.075-.049.1-.049.1-.1.075-5.2,5.272-.125.1-.1.075-.151.052H5.828l-.151-.052-.127-.075-.1-.1L.226,7.042.151,6.967l-.075-.1-.049-.1L0,6.688V6.462l.075-.229L.2,6.007l.125-.151.2-.075.2-.026h3V0H8.174V5.755h2.978l.252.026.177.075.151.151Z" transform="translate(0 0)" fill="#ccc" fill-rule="evenodd"/>
+    </g>
+    <g id="Group_2850" data-name="Group 2850" transform="translate(11608.4 -1142.891) rotate(-90)">
+      <path id="Path_3729-2" data-name="Path 3729" d="M11.859,6.233l.049.229v.226l-.026.075-.049.1-.049.1-.1.075-5.2,5.272-.125.1-.1.075-.151.052H5.828l-.151-.052-.127-.075-.1-.1L.226,7.042.151,6.967l-.075-.1-.049-.1L0,6.688V6.462l.075-.229L.2,6.007l.125-.151.2-.075.2-.026h3V0H8.174V5.755h2.978l.252.026.177.075.151.151Z" transform="translate(0 0)" fill="#ccc" fill-rule="evenodd"/>
+    </g>
+    <g id="Rectangle_1078" data-name="Rectangle 1078" transform="translate(11598.676 -1141.365) rotate(-90)" fill="none" stroke="#ccc" stroke-width="1">
+      <rect width="20.269" height="23.647" rx="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="19.269" height="22.647" rx="2.5" fill="none"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+[package]
+title = "KeyValueDatabase"
+display_name = "KeyValueDatabase extension"
+
+authors = ["NVIDIA"]
+repository = ""
+keywords = ["database"]
+category = "Internal"
+
+[dependencies]
+
+[[python.module]]
+name = "omni.kvdb"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

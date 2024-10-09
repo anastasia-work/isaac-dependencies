@@ -1,0 +1,58 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnPhysXImmediateComputeMeshIntersectingFaces.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_graph_ImmediateComputeMeshIntersectingFaces" (
+        docs="""Computes indices of intersecting faces between pairs of Meshes."""
+    )
+    {
+        token node:type = "omni.physx.graph.ImmediateComputeMeshIntersectingFaces"
+        int node:typeVersion = 1
+
+        # 4 attributes
+        custom uint inputs:execIn (
+            docs="""Input execution"""
+        )
+        custom token[] inputs:overlapsPair0 = [] (
+            docs="""Path of the first geometry from the Prims Bundle to check for intesection with corresponding item at same index in overlapsPair1 input attribute."""
+        )
+        custom token[] inputs:overlapsPair1 = [] (
+            docs="""Path of the second geometry from the Prims Bundle to check for intesection with corresponding item at same index in overlapsPair0 input attribute"""
+        )
+        custom rel inputs:primsBundle (
+            docs="""The prims of interest. It must be a bundle with one or more prim children.
+Currently only meshes prim are supported (sourcePrimType == 'Mesh').
+From each Mesh prim child reads:
+ - 'sourcePrimPath'
+ - 'sourcePrimType'
+ - 'points'
+ - 'faceVertexIndices'
+ - 'faceVertexCounts'
+ - 'worldMatrix'
+ - 'sourcePrimPath'
+(and optionally 'holeIndices', 'orientation', 'meshKey' and 'physics:approximation') attributes"""
+        )
+
+        # 3 attributes
+        custom uint outputs:execOut (
+            docs="""Output execution"""
+        )
+        def Output "outputs_faceIndices" (
+            docs="""Bundle of child prims with faces0 / faces1 attributes containing indices of faces in source meshes that intersect each other"""
+        )
+        {
+        }
+        custom bool[] outputs:overlaps (
+            docs="""Array of booleans where 'True' value signals that a corresponding pair of meshes in overlapsPair0 and overlapsPair1 input arrays at the same index do actually overlap."""
+        )
+    }
+}

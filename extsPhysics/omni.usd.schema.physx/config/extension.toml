@@ -1,0 +1,34 @@
+[core]
+reloadable = false
+# Load at the start, load all schemas with order -100 (with order -1000 the USD libs are loaded)
+order = -100
+
+[package]
+category = "Simulation"
+authors = ["NVIDIA"]
+title = "USD PhysX schema"
+description="USD PhysX schema"
+repository = ""
+keywords = ["physics", "usd"]
+toggleable = false
+
+
+[dependencies]
+"omni.usd.libs" = { }
+"omni.usd.schema.physics" = { }
+
+[[python.module]]
+name = "pxr.PhysxSchema"
+
+[[python.module]]
+name = "usd.schema.physx"
+
+[[python.module]]
+name = "pxr.PhysicsSchemaTools"
+
+[[native.library]]
+path = "bin/${lib_prefix}physxSchema${lib_ext}"
+
+[[native.library]]
+path = "bin/${lib_prefix}physicsSchemaTools${lib_ext}"
+

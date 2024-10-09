@@ -1,0 +1,17 @@
+[package]
+title = "Physics Schema Plugin"
+description="Handles loading of PhysicsSchema."
+changelog="docs/CHANGELOG.md"
+repository = ""
+keywords = ["physics"]
+category = "Internal"
+
+[dependencies]
+"omni.usd.libs" = { }
+"omni.usd.schema.physics" = { }
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[[test]]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

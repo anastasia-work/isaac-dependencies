@@ -1,0 +1,54 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnControlsSettings.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_cct_OgnControlsSettings" (
+        docs="""Setup control rebinds and settings for the Character Controller"""
+    )
+    {
+        token node:type = "omni.physx.cct.OgnControlsSettings"
+        int node:typeVersion = 2
+
+        # 8 attributes
+        custom token inputs:backward = "S" (
+            docs="""Move Backward"""
+        )
+        custom token inputs:down = "Q" (
+            docs="""Move Down"""
+        )
+        custom token inputs:forward = "W" (
+            docs="""Move Forward"""
+        )
+        custom float inputs:gamepadSensitivity = 25 (
+            docs="""Gamepad Sensitivity Multiplier"""
+        )
+        custom token inputs:left = "A" (
+            docs="""Move Left"""
+        )
+        custom float inputs:mouseSensitivity = 25 (
+            docs="""Mouse Sensitivity Multiplier"""
+        )
+        custom token inputs:right = "D" (
+            docs="""Move Right"""
+        )
+        custom token inputs:up = "E" (
+            docs="""Move Up or Jump (depending if gravity is enabled for this Character Controller)"""
+        )
+
+        # 1 attribute
+        def Output "outputs_control_settings" (
+            docs="""Bundle with control settings to connect to the Character Controller node's Controls Settings input."""
+        )
+        {
+        }
+    }
+}

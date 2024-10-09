@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25.914" height="30.432" viewBox="0 0 25.914 30.432">
+  <g id="Group_2811" data-name="Group 2811" transform="translate(-11456.793 457.011)">
+    <g id="Group_1186" data-name="Group 1186" transform="translate(4910.12 -1630)">
+      <g transform="matrix(1, 0, 0, 1, 6546.67, 1172.99)" filter="url(#Path_2202)">
+        <path id="Path_2202-2" data-name="Path 2202" d="M.184-.931l6.035-2.92,6.11,2.92V6.126L6.219,8.949.184,6.126Z" transform="translate(6.77 16.98)" fill="#324043"/>
+      </g>
+      <g id="Group_842" data-name="Group 842" transform="translate(6553.5 1186)">
+        <path id="Path_2199" data-name="Path 2199" d="M0,0,6.183,2.925V10.2L0,7.272Z" transform="translate(0 2.937)" fill="#687477"/>
+        <path id="Path_2200" data-name="Path 2200" d="M6.183,0,0,2.925V10.2L6.183,7.272Z" transform="translate(6.183 2.937)" fill="#84959a"/>
+        <path id="Path_2201" data-name="Path 2201" d="M-9.121,10.437-15.3,13.373-9.121,16.3l6.184-2.925Z" transform="translate(15.304 -10.437)" fill="#97acb1"/>
+      </g>
+    </g>
+    <g id="Group_1187" data-name="Group 1187" transform="translate(-89 12)">
+      <line id="Line_516" data-name="Line 516" x2="2" y2="2" transform="translate(11546.5 -447.5)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_518" data-name="Line 518" x1="2" y2="2" transform="translate(11548.5 -447.5)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_517" data-name="Line 517" y2="8" transform="translate(11548.5 -453.5)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+    </g>
+    <g id="Group_1188" data-name="Group 1188" transform="translate(-68.5 12)">
+      <line id="Line_516-2" data-name="Line 516" x2="2" y2="2" transform="translate(11546.5 -447.5)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_518-2" data-name="Line 518" x1="2" y2="2" transform="translate(11548.5 -447.5)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_517-2" data-name="Line 517" y2="8" transform="translate(11548.5 -453.5)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+    </g>
+    <g id="Group_1189" data-name="Group 1189" transform="translate(-79 0.489)">
+      <line id="Line_520" data-name="Line 520" y2="8.633" transform="translate(11545.8 -454.122)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_519" data-name="Line 519" y2="8.633" transform="translate(11551.8 -454.122)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_521" data-name="Line 521" y2="10.552" transform="translate(11548.8 -457)" fill="none" stroke="#97acb1" stroke-linecap="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+#usda 1.0
+
+def Xform "World"
+{
+    def Cube "BoxActor" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        
+        color3f[] primvars:displayColor = [(0.2784314, 0.4117647, 1)]
+        double size = 25
+        double3 xformOp:translate = (0, 0, 500)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Mesh "Ground" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        uniform token physics:approximation = "none"
+        
+        uniform bool doubleSided = 1
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 1, 2, 3]
+        normal3f[] normals = [(0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1)]
+        point3f[] points = [(-1, 1, 0), (1, 1, 0), (1, -1, 0), (-1, -1, 0)]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        texCoord2f[] primvars:st = [(0, 1), (1, 1), (1, 0), (0, 0)] (
+            interpolation = "varying"
+        )
+        float3 xformOp:scale = (750, 750, 750)
+        uniform token[] xformOpOrder = ["xformOp:scale"]
+    }
+}
+

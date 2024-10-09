@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="39.998" height="39.998" viewBox="0 0 39.998 39.998">
+  <g id="Physics_settings" data-name="Physics settings" transform="translate(-6.295 -1034.106)">
+    <rect id="bgr" width="39.998" height="39.998" transform="translate(6.295 1034.107)" fill="none"/>
+    <g id="more_options" data-name="more options" transform="translate(13.334 1043.441)">
+      <g id="Group_3655" data-name="Group 3655" transform="translate(0 0)">
+        <line id="Line_871" data-name="Line 871" x2="22.843" transform="translate(0 19.241)" fill="none" stroke="#00101f" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_872" data-name="Line 872" x2="22.843" transform="translate(0 11.704)" fill="none" stroke="#00101f" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_873" data-name="Line 873" x2="22.843" transform="translate(0 4.168)" fill="none" stroke="#00101f" stroke-linecap="round" stroke-width="2"/>
+        <g id="Ellipse_155" data-name="Ellipse 155" transform="translate(11.205)" fill="#00101f" stroke="#00101f" stroke-width="1">
+          <circle cx="4.168" cy="4.168" r="4.168" stroke="none"/>
+          <circle cx="4.168" cy="4.168" r="3.668" fill="none"/>
+        </g>
+        <g id="Ellipse_156" data-name="Ellipse 156" transform="translate(1.808 7.536)" fill="#00101f" stroke="#00101f" stroke-width="1">
+          <circle cx="4.168" cy="4.168" r="4.168" stroke="none"/>
+          <circle cx="4.168" cy="4.168" r="3.668" fill="none"/>
+        </g>
+        <g id="Ellipse_157" data-name="Ellipse 157" transform="translate(11.205 15.072)" fill="#00101f" stroke="#00101f" stroke-width="1">
+          <circle cx="4.168" cy="4.168" r="4.168" stroke="none"/>
+          <circle cx="4.168" cy="4.168" r="3.668" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <g id="more_options-2" data-name="more options" transform="translate(14.873 1042.376)">
+      <g id="Group_3655-2" data-name="Group 3655" transform="translate(0 0)">
+        <line id="Line_871-2" data-name="Line 871" x2="22.843" transform="translate(0 19.241)" fill="none" stroke="#afafaf" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_872-2" data-name="Line 872" x2="22.843" transform="translate(0 11.704)" fill="none" stroke="#afafaf" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_873-2" data-name="Line 873" x2="22.843" transform="translate(0 4.168)" fill="none" stroke="#afafaf" stroke-linecap="round" stroke-width="2"/>
+        <g id="Ellipse_155-2" data-name="Ellipse 155" transform="translate(11.205)" fill="#707070" stroke="#afafaf" stroke-width="1">
+          <circle cx="4.168" cy="4.168" r="4.168" stroke="none"/>
+          <circle cx="4.168" cy="4.168" r="3.668" fill="none"/>
+        </g>
+        <g id="Ellipse_156-2" data-name="Ellipse 156" transform="translate(1.808 7.536)" fill="#707070" stroke="#afafaf" stroke-width="1">
+          <circle cx="4.168" cy="4.168" r="4.168" stroke="none"/>
+          <circle cx="4.168" cy="4.168" r="3.668" fill="none"/>
+        </g>
+        <g id="Ellipse_157-2" data-name="Ellipse 157" transform="translate(11.205 15.072)" fill="#707070" stroke="#afafaf" stroke-width="1">
+          <circle cx="4.168" cy="4.168" r="4.168" stroke="none"/>
+          <circle cx="4.168" cy="4.168" r="3.668" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <path id="Path_5443" data-name="Path 5443" d="M5.26,2.488l.046.056.034.057.022.056v.137l-.022.056-.034.057-.046.056-.046.046-.056.034-.068.012-.057.012H.341L.273,3.056.217,3.044.159,3.01.114,2.965.069,2.908.034,2.851.012,2.795,0,2.726l.012-.068L.034,2.6l.035-.057.045-.056L2.454.114,2.5.068,2.556.034,2.624.012,2.693,0l.056.012.068.022.057.034L2.92.114,5.26,2.488Z" transform="translate(46.293 1070.313) rotate(135)" fill="#c6c6c6" fill-rule="evenodd"/>
+  </g>
+</svg>

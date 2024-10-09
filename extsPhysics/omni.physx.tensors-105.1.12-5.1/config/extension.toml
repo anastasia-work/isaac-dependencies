@@ -1,0 +1,15 @@
+[package]
+version = "0.1.0"
+
+title = "PhysX Tensor API Implementation"
+repository = ""
+keywords = ["omniverse", "kit", "physics", "physx", "tensors"]
+
+[dependencies]
+"omni.physics.tensors" = {}
+"omni.physx" = {}
+"omni.usd" = {}
+
+[[native.plugin]]
+path = "bin/*.plugin"
+recursive = false

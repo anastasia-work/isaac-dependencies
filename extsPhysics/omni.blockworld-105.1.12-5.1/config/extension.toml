@@ -1,0 +1,35 @@
+[package]
+category = "simulation"
+authors = ["NVIDIA"]
+title = "Blockworld"
+description="Blockworld"
+repository = ""
+keywords = ["physics", "physx", "blockworld"]
+
+[dependencies]
+"omni.usd" = {}
+"omni.physx" = {}
+"omni.physx.cct" = {}
+"omni.physx.demos" = {}
+"omni.physx.tests" = {optional=true}
+"omni.physx.tests.visual" = {optional=true}
+
+[[python.module]]
+name = "omni.blockworld"
+
+[[test]]
+dependencies = [
+   "omni.hydra.rtx",
+   "omni.kit.viewport.window",
+   "omni.assets.plugins",
+   "omni.kit.renderer.core",
+   "omni.kit.primitive.mesh",
+   "omni.physx.tests",
+   "omni.physx.tests.visual",
+]
+args = [
+   "--/app/asyncRendering=false",
+   "--/app/file/ignoreUnsavedOnExit=true",
+   "--/rtx/rendermode=\"rtx\"",
+]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

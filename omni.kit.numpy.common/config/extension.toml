@@ -1,0 +1,18 @@
+[package]
+title = "Common Types Numpy Bindings"
+description = "Numpy type bindings for common vector types"
+readme ="docs/README.md"
+preview_image = ""
+version = "0.1.2"
+
+[dependencies]
+"omni.kit.pip_archive" = {}
+
+[[python.module]]
+name = "omni.kit.numpy.common"
+
+# having "native" defined makes package separate for each platform & build config (bindings are shared libraries)
+[native]
+
+[[test]]
+waiver = "Simple binding extension (carb types to numpy)"

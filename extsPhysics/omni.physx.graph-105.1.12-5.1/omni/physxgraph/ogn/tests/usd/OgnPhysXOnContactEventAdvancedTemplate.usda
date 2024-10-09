@@ -1,0 +1,76 @@
+#usda 1.0
+(
+    doc ="""Generated from node description file OgnPhysXOnContactEventAdvanced.ogn
+Contains templates for node types found in that file."""
+)
+
+def OmniGraph "TestGraph"
+{
+    token evaluator:type = "push"
+    int2 fileFormatVersion = (1, 3)
+    token flatCacheBacking = "Shared"
+    token pipelineStage = "pipelineStageSimulation"
+
+    def OmniGraphNode "Template_omni_physx_graph_OnContactEventAdvanced" (
+        docs="""PhysX contact event triggered execution."""
+    )
+    {
+        token node:type = "omni.physx.graph.OnContactEventAdvanced"
+        int node:typeVersion = 1
+
+        # 2 attributes
+        custom token[] inputs:bodyPaths (
+            docs="""Body prim paths to check against."""
+        )
+        custom rel inputs:targetBodies (
+            docs="""Body prims to check against."""
+        )
+
+        # 15 attributes
+        custom float[] outputs:contactDepths (
+            docs="""Contact point depths."""
+        )
+        custom vector3f[] outputs:contactImpulses (
+            docs="""Contact point impulses."""
+        )
+        custom normal3f[] outputs:contactNormals (
+            docs="""Contact point normals."""
+        )
+        custom point3f[] outputs:contactPoints (
+            docs="""Contact point positions."""
+        )
+        custom token outputs:contactingBody (
+            docs="""Path of the physics body that came in contact with a node input body to trigger the contact event."""
+        )
+        custom token outputs:contactingCollider (
+            docs="""Path to the collider of the contacting physics body."""
+        )
+        custom int[] outputs:contactingFaces (
+            docs="""Contact face indexes for the contacting collider."""
+        )
+        custom int[] outputs:contactingMaterials (
+            docs="""Contact material indexes for the contacting collider."""
+        )
+        custom uint outputs:foundExecOut (
+            docs="""Output execution trigger for contact found events. Note that the node only evaluates and triggers for contact events where one of the bodies have the Contact Report API applied."""
+        )
+        custom token outputs:inputBody (
+            docs="""Path of the node input physics body that triggered the contact event."""
+        )
+        custom token outputs:inputBodyCollider (
+            docs="""Path to the collider of the input body."""
+        )
+        custom int[] outputs:inputBodyFaces (
+            docs="""Contact face indexes for the input body collider."""
+        )
+        custom int[] outputs:inputBodyMaterials (
+            docs="""Contact material indexes for input body collider."""
+        )
+        custom uint outputs:lostExecOut (
+            docs="""Output execution trigger for contact lost events. Note that the node only evaluates and triggers for contact events where one of the bodies have the Contact Report API applied."""
+        )
+        custom uint outputs:persistsExecOut (
+            docs="""Output execution trigger for contact persists events. Note that the node only evaluates and triggers for contact events where one of the bodies have the Contact Report API applied."""
+        )
+    }
+}

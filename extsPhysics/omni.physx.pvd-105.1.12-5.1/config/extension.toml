@@ -1,0 +1,39 @@
+[package]
+title = "Omniverse PhysX PVD plugin"
+description="Omniverse PhysX PVD plugin."
+changelog="docs/CHANGELOG.md"
+repository = ""
+keywords = ["physics", "physx", "pvd"]
+category = "Simulation"
+preview_image = "images/omni.physx.pvd.preview.png"
+icon = "icons/Pvdlogo.png"
+readme = "docs/README.md"
+
+[[python.module]]
+name = "omni.physxpvd"
+
+[[native.plugin]]
+path = "bin/*.plugin"
+
+[dependencies]
+"omni.ui" = {}
+"omni.timeline" = {}
+"omni.physx" = {}
+"omni.physx.tests" = {}
+"omni.physx.ui" = {}
+"omni.debugdraw" = {}
+"omni.kit.menu.utils" = {}
+"omni.kit.window.toolbar" = {}
+"omni.kit.widget.stage" = {}
+"omni.kit.widget.settings" = {}
+"omni.kit.property.physx" = {}
+"omni.kit.tool.asset_importer" = {}
+"omni.kit.timeline.minibar" = {}
+
+[settings]
+exts."omni.kit.timeline.minibar".speedupEnable = false
+
+[[test]]
+dependencies = [
+   "omni.kit.renderer.core",
+]

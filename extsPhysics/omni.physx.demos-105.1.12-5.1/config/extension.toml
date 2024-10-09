@@ -1,0 +1,35 @@
+[package]
+category = "internal"
+authors = ["NVIDIA"]
+title = "PhysX Demos"
+description="Physics samples"
+repository = ""
+keywords = ["physics", "physx", "samples", "demos"]
+changelog="docs/CHANGELOG.md"
+
+[dependencies]
+"omni.usd" = {}
+"usdrt.gf" = {}
+"omni.ui" = {}
+"omni.physx" = {}
+"omni.physx.ui" = {}
+"omni.debugdraw" = {}
+"omni.kit.stage_templates" = {}
+"omni.kit.window.file" = {}
+"omni.kit.widget.text_editor" = {}
+"omni.kit.viewport.utility" = {}
+"omni.kit.material.library" = {optional=true}  # to get CreateAndBindMdlMaterialFromLibrary, optional to prevent loading iray in stubgen phase ...
+
+# physics demo asset path setting
+[settings]
+physics.demoAssetsPath = "https://omniverse-content-staging.s3.us-west-2.amazonaws.com/DoNotDelete/PhysicsDemoAssets/105.1/"
+
+[[python.module]]
+name = "omni.physxdemos"
+
+[[test]]
+dependencies = [
+   "omni.kit.renderer.core",
+   "omni.kit.material.library",
+]
+waiver = "PhysX tests are running in a separate CI pipeline. Tests are in separate extensions."

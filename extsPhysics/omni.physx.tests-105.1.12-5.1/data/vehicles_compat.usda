@@ -1,0 +1,469 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (0, 0, 50015)
+                double3 target = (0, 0, 0)
+            }
+            dictionary Perspective = {
+                double3 position = (40.58208163857139, 42.43208163261093, 40.582081638571346)
+                double3 target = (0, 1.8499999940395355, 0)
+            }
+            dictionary Right = {
+                double3 position = (-50015, 0, -1.1105560915325441e-11)
+                double3 target = (0, 0, 0)
+            }
+            dictionary Top = {
+                double3 position = (-4.330100684917241e-12, 50003.69999998808, 1.1103051811287141e-11)
+                double3 target = (0, 0, 0)
+            }
+            string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary omni_layer = {
+            dictionary muteness = {
+            }
+        }
+        dictionary renderSettings = {
+            float "rtx:post:lensDistortion:cameraFocalLength" = 18.147562
+        }
+    }
+    defaultPrim = "World"
+    endTimeCode = 100
+    metersPerUnit = 1
+    startTimeCode = 0
+    timeCodesPerSecond = 24
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    def PhysxVehicleGlobalSettings "VehicleGlobalSettings"
+    {
+        float3 forwardAxis = (0, 0, 1)
+        float3 upAxis = (0, 1, 0)
+        uniform token updateMode = "velocityChange"
+    }
+
+    def PhysicsScene "PhysicsScene"
+    {
+        vector3f physics:gravityDirection = (0, -1, 0)
+        float physics:gravityMagnitude = 10
+    }
+
+    def SphereLight "SphereLight"
+    {
+        float intensity = 30000
+        float radius = 1.5
+        float3 xformOp:translate = (6.5, 11.5, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Material "TarmacMaterial" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.7
+        float physics:restitution = 0
+        float physics:staticFriction = 0.9
+    }
+
+    def Material "GravelMaterial" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.6
+        float physics:restitution = 0
+        float physics:staticFriction = 0.6
+    }
+
+    def PhysxVehicleTireFrictionTable "WinterTireFrictionTable"
+    {
+        float[] frictionValues = [0.75, 0.6]
+        prepend rel groundMaterials = [
+            </World/TarmacMaterial>,
+            </World/GravelMaterial>,
+        ]
+    }
+
+    def PhysxVehicleTireFrictionTable "SummerTireFrictionTable"
+    {
+        float[] frictionValues = [0.7, 0.6]
+        prepend rel groundMaterials = [
+            </World/TarmacMaterial>,
+            </World/GravelMaterial>,
+        ]
+    }
+
+    def PhysicsCollisionGroup "VehicleChassisCollisionGroup"
+    {
+        prepend rel collection:colliders:includes = </World/Vehicle/ChassisCollision>
+        prepend rel physics:filteredGroups = </World/VehicleGroundQueryGroup>
+    }
+
+    def PhysicsCollisionGroup "VehicleWheelCollisionGroup"
+    {
+        prepend rel collection:colliders:includes = [
+            </World/Vehicle/FrontLeftWheel/Collision>,
+            </World/Vehicle/FrontRightWheel/Collision>,
+            </World/Vehicle/RearLeftWheel/Collision>,
+            </World/Vehicle/RearRightWheel/Collision>,
+        ]
+        prepend rel physics:filteredGroups = [
+            </World/VehicleGroundQueryGroup>,
+            </World/GroundSurfaceCollisionGroup>,
+        ]
+    }
+
+    def PhysicsCollisionGroup "VehicleGroundQueryGroup"
+    {
+        prepend rel physics:filteredGroups = [
+            </World/VehicleChassisCollisionGroup>,
+            </World/VehicleWheelCollisionGroup>,
+        ]
+    }
+
+    def PhysicsCollisionGroup "GroundSurfaceCollisionGroup"
+    {
+        prepend rel collection:colliders:includes = </World/GroundPlane/CollisionPlane>
+        prepend rel physics:filteredGroups = [
+            </World/GroundSurfaceCollisionGroup>,
+            </World/VehicleWheelCollisionGroup>,
+        ]
+    }
+
+    def PhysxVehicleWheel "FrontWheel"
+    {
+        float dampingRate = 0.25
+        float mass = 20
+        float maxBrakeTorque = 3600
+        float maxHandBrakeTorque = 0
+        float maxSteerAngle = 0.554264
+        float moi = 1.225
+        float radius = 0.35
+        float toeAngle = 0
+        float width = 0.15
+    }
+
+    def PhysxVehicleWheel "RearWheel"
+    {
+        float dampingRate = 0.25
+        float mass = 20
+        float maxBrakeTorque = 3600
+        float maxHandBrakeTorque = 3000
+        float maxSteerAngle = 0
+        float moi = 1.225
+        float radius = 0.35
+        float toeAngle = 0
+        float width = 0.15
+    }
+
+    def PhysxVehicleTire "FrontTire"
+    {
+        float camberStiffnessPerUnitGravity = 5.72958
+        prepend rel frictionTable = </World/WinterTireFrictionTable>
+        float2[] frictionVsSlipGraph = [(0, 1), (0.1, 1), (1, 1)]
+        float latStiffX = 2
+        float latStiffY = 17
+        float longitudinalStiffnessPerUnitGravity = 500
+    }
+
+    def PhysxVehicleTire "RearTire"
+    {
+        float camberStiffnessPerUnitGravity = 5.72958
+        prepend rel frictionTable = </World/WinterTireFrictionTable>
+        float2[] frictionVsSlipGraph = [(0, 1), (0.1, 1), (1, 1)]
+        float latStiffX = 2
+        float latStiffY = 25
+        float longitudinalStiffnessPerUnitGravity = 500
+    }
+
+    def PhysxVehicleSuspension "FrontSuspension"
+    {
+        float camberAtMaxCompression = 0
+        float camberAtMaxDroop = 0
+        float camberAtRest = 0
+        float maxCompression = 0.1
+        float maxDroop = 0.1
+        float springDamperRate = 4500
+        float springStrength = 45000
+    }
+
+    def PhysxVehicleSuspension "RearSuspension"
+    {
+        float camberAtMaxCompression = 0
+        float camberAtMaxDroop = 0
+        float camberAtRest = 0
+        float maxCompression = 0.1
+        float maxDroop = 0.1
+        float springDamperRate = 4500
+        float springStrength = 45000
+    }
+
+    def PhysxVehicleEngine "Engine"
+    {
+        float dampingRateFullThrottle = 0.15
+        float dampingRateZeroThrottleClutchDisengaged = 0.35
+        float dampingRateZeroThrottleClutchEngaged = 2
+        float maxRotationSpeed = 600
+        float moi = 1
+        float peakTorque = 1000
+        float2[] torqueCurve = [(0, 0.8), (0.33, 1), (1, 0.8)]
+    }
+
+    def PhysxVehicleGears "Gears"
+    {
+        float[] ratios = [-4, 4, 2, 1.5, 1.1, 1]
+        float ratioScale = 4
+        float switchTime = 0.5
+    }
+
+    def PhysxVehicleAutoGearBox "AutoGearBox"
+    {
+        float[] downRatios = [0.5, 0.5, 0.5, 0.5]
+        float latency = 2
+        float[] upRatios = [0.15, 0.65, 0.65, 0.65, 0.65]
+    }
+
+    def PhysxVehicleClutch "Clutch"
+    {
+        float strength = 10
+    }
+	
+	def PhysxVehicleDriveBasic "DriveBasic"
+    {
+        float peakTorque = 500
+    }
+
+    def PhysxVehicleDriveStandard "DriveStandard"
+    {
+        prepend rel autoGearBox = </World/AutoGearBox>
+        prepend rel clutch = </World/Clutch>
+        prepend rel engine = </World/Engine>
+        prepend rel gears = </World/Gears>
+    }
+
+    def Xform "Vehicle" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI", "PhysxVehicleAPI", "PhysxVehicleControllerAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, -0.25, 0)
+        float3 physics:diagonalInertia = (3606, 3942.0005, 636)
+        float physics:mass = 1800
+        prepend rel physxVehicle:drive = </World/DriveStandard>
+        int physxVehicle:highForwardSpeedSubStepCount = 1
+        int physxVehicle:lowForwardSpeedSubStepCount = 3
+        float physxVehicle:minLongitudinalSlipDenominator = 4
+        float physxVehicle:subStepThresholdLongitudinalSpeed = 5
+        bool physxVehicle:vehicleEnabled = 1
+        float physxVehicleController:accelerator = 0
+        bool physxVehicleController:automatic = 1
+        float physxVehicleController:brake = 0
+        float physxVehicleController:handbrake = 0
+        float physxVehicleController:steerLeft = 0
+        float physxVehicleController:steerRight = 0
+        int physxVehicleController:targetGear = 0
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:translate = (0, 3, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Xform "FrontLeftWheel" (
+            prepend apiSchemas = ["PhysxVehicleWheelAttachmentAPI"]
+        )
+        {
+            prepend rel physxVehicleWheelAttachment:collisionGroup = </World/VehicleGroundQueryGroup>
+            bool physxVehicleWheelAttachment:driven = 1
+            prepend rel physxVehicleWheelAttachment:suspension = </World/FrontSuspension>
+            float3 physxVehicleWheelAttachment:suspensionForceAppPointOffset = (0.8, -0.4, 1.6)
+            float3 physxVehicleWheelAttachment:suspensionTravelDirection = (0, -1, 0)
+            prepend rel physxVehicleWheelAttachment:tire = </World/FrontTire>
+            float3 physxVehicleWheelAttachment:tireForceAppPointOffset = (0.8, -0.4, 1.6)
+            prepend rel physxVehicleWheelAttachment:wheel = </World/FrontWheel>
+            float3 physxVehicleWheelAttachment:wheelCenterOfMassOffset = (0.8, -0.4, 1.6)
+            float3 xformOp:translate = (0.8, -0.65, 1.6)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cylinder "Collision" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                float physxCollision:contactOffset = 0.02
+                float physxCollision:restOffset = 0
+                uniform token purpose = "guide"
+                double radius = 0.35
+            }
+
+            def Cylinder "Render"
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                double radius = 0.35
+            }
+        }
+
+        def Xform "FrontRightWheel" (
+            prepend apiSchemas = ["PhysxVehicleWheelAttachmentAPI"]
+        )
+        {
+            prepend rel physxVehicleWheelAttachment:collisionGroup = </World/VehicleGroundQueryGroup>
+            bool physxVehicleWheelAttachment:driven = 1
+            prepend rel physxVehicleWheelAttachment:suspension = </World/FrontSuspension>
+            float3 physxVehicleWheelAttachment:suspensionForceAppPointOffset = (-0.8, -0.4, 1.6)
+            float3 physxVehicleWheelAttachment:suspensionTravelDirection = (0, -1, 0)
+            prepend rel physxVehicleWheelAttachment:tire = </World/FrontTire>
+            float3 physxVehicleWheelAttachment:tireForceAppPointOffset = (-0.8, -0.4, 1.6)
+            prepend rel physxVehicleWheelAttachment:wheel = </World/FrontWheel>
+            float3 physxVehicleWheelAttachment:wheelCenterOfMassOffset = (-0.8, -0.4, 1.6)
+            float3 xformOp:translate = (-0.8, -0.65, 1.6)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cylinder "Collision" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                float physxCollision:contactOffset = 0.02
+                float physxCollision:restOffset = 0
+                uniform token purpose = "guide"
+                double radius = 0.35
+            }
+
+            def Cylinder "Render"
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                double radius = 0.35
+            }
+        }
+
+        def Xform "RearLeftWheel" (
+            prepend apiSchemas = ["PhysxVehicleWheelAttachmentAPI"]
+        )
+        {
+            prepend rel physxVehicleWheelAttachment:collisionGroup = </World/VehicleGroundQueryGroup>
+            bool physxVehicleWheelAttachment:driven = 0
+            prepend rel physxVehicleWheelAttachment:suspension = </World/RearSuspension>
+            float3 physxVehicleWheelAttachment:suspensionForceAppPointOffset = (0.8, -0.4, -1.6)
+            float3 physxVehicleWheelAttachment:suspensionTravelDirection = (0, -1, 0)
+            prepend rel physxVehicleWheelAttachment:tire = </World/RearTire>
+            float3 physxVehicleWheelAttachment:tireForceAppPointOffset = (0.8, -0.4, -1.6)
+            prepend rel physxVehicleWheelAttachment:wheel = </World/RearWheel>
+            float3 physxVehicleWheelAttachment:wheelCenterOfMassOffset = (0.8, -0.4, -1.6)
+            float3 xformOp:translate = (0.8, -0.65, -1.6)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cylinder "Collision" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                float physxCollision:contactOffset = 0.02
+                float physxCollision:restOffset = 0
+                uniform token purpose = "guide"
+                double radius = 0.35
+            }
+
+            def Cylinder "Render"
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                double radius = 0.35
+            }
+        }
+
+        def Xform "RearRightWheel" (
+            prepend apiSchemas = ["PhysxVehicleWheelAttachmentAPI"]
+        )
+        {
+            prepend rel physxVehicleWheelAttachment:collisionGroup = </World/VehicleGroundQueryGroup>
+            bool physxVehicleWheelAttachment:driven = 0
+            prepend rel physxVehicleWheelAttachment:suspension = </World/RearSuspension>
+            float3 physxVehicleWheelAttachment:suspensionForceAppPointOffset = (-0.8, -0.4, -1.6)
+            float3 physxVehicleWheelAttachment:suspensionTravelDirection = (0, -1, 0)
+            prepend rel physxVehicleWheelAttachment:tire = </World/RearTire>
+            float3 physxVehicleWheelAttachment:tireForceAppPointOffset = (-0.8, -0.4, -1.6)
+            prepend rel physxVehicleWheelAttachment:wheel = </World/RearWheel>
+            float3 physxVehicleWheelAttachment:wheelCenterOfMassOffset = (-0.8, -0.4, -1.6)
+            float3 xformOp:translate = (-0.8, -0.65, -1.6)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cylinder "Collision" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                float physxCollision:contactOffset = 0.02
+                float physxCollision:restOffset = 0
+                uniform token purpose = "guide"
+                double radius = 0.35
+            }
+
+            def Cylinder "Render"
+            {
+                uniform token axis = "X"
+                float3[] extent = [(-0.075, -0.35, -0.35), (0.075, 0.35, 0.35)]
+                double height = 0.15
+                double radius = 0.35
+            }
+        }
+
+        def Cube "ChassisCollision" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+        )
+        {
+            float physxCollision:contactOffset = 0.02
+            float physxCollision:restOffset = 0
+            uniform token purpose = "guide"
+            float3 xformOp:scale = (0.9, 0.7, 2.4)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Mesh "ChassisRender"
+        {
+            int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+            int[] faceVertexIndices = [0, 1, 3, 2, 4, 5, 7, 6, 10, 11, 13, 12, 14, 15, 9, 8, 17, 23, 21, 19, 22, 16, 18, 20]
+            normal3f[] normals = [(0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, 0, -1), (0, 0, -1), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, -1), (0, 0, -1), (-1, 0, 0), (1, 0, 0), (-1, 0, 0), (1, 0, 0), (-1, 0, 0), (1, 0, 0), (-1, 0, 0), (1, 0, 0)]
+            point3f[] points = [(-0.7, 0.7, -2.4), (0.7, 0.7, -2.4), (-0.7, 0.7, 2.4), (0.7, 0.7, 2.4), (-0.7, -0.7, 2.4), (0.7, -0.7, 2.4), (-0.7, -0.7, -2.4), (0.7, -0.7, -2.4), (-0.7, 0.7, -2.4), (0.7, 0.7, -2.4), (-0.7, 0.7, 2.4), (0.7, 0.7, 2.4), (-0.7, -0.7, 2.4), (0.7, -0.7, 2.4), (-0.7, -0.7, -2.4), (0.7, -0.7, -2.4), (-0.7, 0.7, -2.4), (0.7, 0.7, -2.4), (-0.7, 0.7, 2.4), (0.7, 0.7, 2.4), (-0.7, -0.7, 2.4), (0.7, -0.7, 2.4), (-0.7, -0.7, -2.4), (0.7, -0.7, -2.4)]
+            color3f[] primvars:displayColor = [(0.2784314, 0.64705884, 1)]
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def Mesh "GroundPlane"
+    {
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 1, 2, 3]
+        normal3f[] normals = [(0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0)]
+        point3f[] points = [(-15, 0, -15), (15, 0, -15), (15, 0, 15), (-15, 0, 15)]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Plane "CollisionPlane" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Y"
+            rel material:binding:physics = </World/TarmacMaterial> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            uniform token purpose = "guide"
+        }
+    }
+}
+
